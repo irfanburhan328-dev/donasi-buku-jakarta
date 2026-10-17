@@ -6,20 +6,15 @@ require('dotenv').config();
 
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
-
-// Menyajikan file statis dari folder public
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Konfigurasi Database PostgreSQL (Supabase)
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 
-// Endpoint Cek Health Server
 app.get('/api/health', async (req, res) => {
   try {
     const result = await pool.query('SELECT NOW()');
@@ -29,7 +24,6 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Jalankan Server (Railway otomatis memberikan PORT)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server berjalan di port ${PORT}`);
