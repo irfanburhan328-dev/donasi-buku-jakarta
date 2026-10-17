@@ -78,6 +78,26 @@ app.post('/api/donasi', async (req, res) => {
   }
 });
 
+// API Statistik Dampak
+app.get('/api/stats', async (req, res) => {
+  try {
+    const totalBukuResult = await pool.query('SELECT COALESCE(SUM(jumlah_buku), 0) AS total_buku, COUNT(*) AS total_donatur FROM donasi');
+    const { total_buku, total_donatur } = totalBukuResult.rows[0];
+
+    res.json({
+      success: true,
+      stats: {
+        totalBuku: parseInt(total_buku) + 1250, // Base data awal + data realtime
+        totalDonatur: parseInt(total_donatur) + 180,
+        tbmTerbantu: 24,
+        wilayahJangkauan: 5
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // API Ambil Daftar Donasi Buku
 app.get('/api/donasi', async (req, res) => {
   try {

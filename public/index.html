@@ -6,12 +6,12 @@
   <title>Donasi Buku Jakarta</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-900 text-white font-sans">
+<body class="bg-slate-900 text-white font-sans scroll-smooth">
 
   <!-- Navbar -->
   <nav class="flex items-center justify-between px-8 py-4 bg-slate-800/80 backdrop-blur sticky top-0 z-50 border-b border-slate-700">
     <div class="text-2xl font-bold text-amber-400">📚 DonasiBuku<span class="text-cyan-400">Jakarta</span></div>
-    <div class="space-x-6 text-slate-300 font-medium">
+    <div class="space-x-6 text-slate-300 font-medium hidden md:block">
       <a href="#about" class="hover:text-amber-400 transition">Tentang Kami</a>
       <a href="#flow" class="hover:text-amber-400 transition">Alur Donasi</a>
       <a href="#dampak" class="hover:text-amber-400 transition">Dampak</a>
@@ -34,16 +34,16 @@
       Platform penyaluran buku layak baca langsung ke sekolah, taman baca masyarakat, dan lembaga sosial yang membutuhkan di wilayah DKI Jakarta.
     </p>
     <div class="mt-8 space-x-4">
-      <a href="#form-donasi" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition">Donasi Buku Sekarang</a>
-      <a href="#flow" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-6 py-3 rounded-xl transition">Pelajari Alur</a>
+      <a href="#form-donasi" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition inline-block">Donasi Buku Sekarang</a>
+      <a href="#flow" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-6 py-3 rounded-xl transition inline-block">Pelajari Alur</a>
     </div>
   </section>
 
   <!-- Section About -->
   <section id="about" class="py-16 px-8 max-w-5xl mx-auto">
     <h2 class="text-3xl font-bold text-center text-amber-400 mb-8">Tentang Kami</h2>
-    <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl text-slate-300 leading-relaxed text-center">
-      Donasi Buku Jakarta adalah inisiatif sosial berbasis komunitas yang bertujuan untuk menjembatani pemilik buku dengan anak-anak dan ruang baca yang membutuhkan di seluruh penjuru Jakarta.
+    <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl text-slate-300 leading-relaxed text-center shadow-xl">
+      Donasi Buku Jakarta adalah inisiatif sosial berbasis komunitas yang bertujuan untuk menjembatani pemilik buku dengan anak-anak dan ruang baca yang membutuhkan di seluruh penjuru Jakarta. Kami percaya setiap buku punya kesempatan kedua untuk menginspirasi kehidupan anak-anak bangsa.
     </div>
   </section>
 
@@ -51,17 +51,17 @@
   <section id="flow" class="py-16 px-8 bg-slate-800/50">
     <h2 class="text-3xl font-bold text-center text-cyan-400 mb-12">Alur Donasi Buku</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center">
+      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center shadow-lg">
         <div class="text-4xl mb-4">📝</div>
         <h3 class="text-xl font-bold text-amber-400 mb-2">1. Isi Form</h3>
         <p class="text-slate-400 text-sm">Lengkapi data buku dan alamat lokasi penjemputan atau pengiriman.</p>
       </div>
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center">
+      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center shadow-lg">
         <div class="text-4xl mb-4">📦</div>
         <h3 class="text-xl font-bold text-amber-400 mb-2">2. Packing & Serahkan</h3>
         <p class="text-slate-400 text-sm">Kemas buku secara rapi. Kurir relawan kami siap menjemput buku Anda.</p>
       </div>
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center">
+      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center shadow-lg">
         <div class="text-4xl mb-4">📖</div>
         <h3 class="text-xl font-bold text-amber-400 mb-2">3. Penyaluran</h3>
         <p class="text-slate-400 text-sm">Buku disalurkan langsung ke TBM (Taman Baca Masyarakat) penerima manfaat.</p>
@@ -69,8 +69,47 @@
     </div>
   </section>
 
+  <!-- Section Dampak (NEW) -->
+  <section id="dampak" class="py-20 px-8 max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-amber-400 mb-3">Dampak & Transparansi</h2>
+      <p class="text-slate-400">Jejak kebaikan warga Jakarta yang telah tersalurkan secara nyata.</p>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
+        <div id="statBuku" class="text-3xl md:text-4xl font-extrabold text-cyan-400">1,250+</div>
+        <div class="text-slate-400 text-sm mt-2">Buku Terkumpul</div>
+      </div>
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
+        <div id="statDonatur" class="text-3xl md:text-4xl font-extrabold text-amber-400">180+</div>
+        <div class="text-slate-400 text-sm mt-2">Donatur Bergabung</div>
+      </div>
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
+        <div id="statTbm" class="text-3xl md:text-4xl font-extrabold text-emerald-400">24</div>
+        <div class="text-slate-400 text-sm mt-2">TBM / Sekolah Terbantu</div>
+      </div>
+      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
+        <div id="statWilayah" class="text-3xl md:text-4xl font-extrabold text-purple-400">5</div>
+        <div class="text-slate-400 text-sm mt-2">Wilayah Kota DKI</div>
+      </div>
+    </div>
+
+    <!-- Testimonial / Story Card -->
+    <div class="bg-gradient-to-r from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl">
+      <div class="text-6xl">🏫</div>
+      <div>
+        <p class="text-slate-300 italic text-lg mb-4">
+          "Terima kasih untuk para donatur Donasi Buku Jakarta. Koleksi bacaan di Taman Baca kami di Jakarta Utara kini makin beragam dan anak-anak jadi makin semangat membaca setiap sore."
+        </p>
+        <div class="font-bold text-amber-400">— Pengelola TBM Kampung Nelayan, Cilincing</div>
+      </div>
+    </div>
+  </section>
+
   <!-- Section Form Donasi -->
-  <section id="form-donasi" class="py-20 px-4">
+  <section id="form-donasi" class="py-20 px-4 bg-slate-800/30">
     <div class="max-w-2xl mx-auto bg-slate-800 border border-slate-700 p-8 rounded-2xl shadow-2xl">
       <h2 class="text-2xl font-bold text-amber-400 text-center mb-2">Formulir Donasi Buku</h2>
       <p class="text-slate-400 text-center text-sm mb-6">Isi data di bawah ini untuk memulai donasi buku Anda.</p>
@@ -133,15 +172,32 @@
     © 2026 Donasi Buku Jakarta. Seluruh hak cipta dilindungi.
   </footer>
 
-  <!-- Script Integrasi API -->
+  <!-- Script Integrasi API & Stats -->
   <script>
+    // Fetch Dampak Stats Realtime
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('statBuku').innerText = data.stats.totalBuku.toLocaleString('id-ID') + '+';
+          document.getElementById('statDonatur').innerText = data.stats.totalDonatur.toLocaleString('id-ID') + '+';
+          document.getElementById('statTbm').innerText = data.stats.tbmTerbantu;
+          document.getElementById('statWilayah').innerText = data.stats.wilayahJangkauan;
+        }
+      } catch (err) {
+        console.log('Gagal memuat statistik realtime');
+      }
+    }
+    fetchStats();
+
+    // Form Donasi Handler
     const form = document.getElementById('donasiForm');
     const alertMsg = document.getElementById('alertMsg');
     const btnSubmit = document.getElementById('btnSubmit');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
       btnSubmit.disabled = true;
       btnSubmit.innerText = 'Mengirim...';
 
@@ -163,13 +219,13 @@
         });
 
         const result = await response.json();
-
         alertMsg.classList.remove('hidden', 'bg-red-900/50', 'text-red-300', 'bg-green-900/50', 'text-green-300');
 
         if (result.success) {
           alertMsg.classList.add('bg-green-900/50', 'text-green-300');
           alertMsg.innerText = result.message;
           form.reset();
+          fetchStats(); // Update angka statistik secara otomatis setelah donasi dikirim
         } else {
           alertMsg.classList.add('bg-red-900/50', 'text-red-300');
           alertMsg.innerText = result.message || 'Gagal mengirim data.';
