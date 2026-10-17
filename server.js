@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -8,7 +9,9 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+
+// Menyajikan file statis dari folder public
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Konfigurasi Database PostgreSQL (Supabase)
 const pool = new Pool({
@@ -26,7 +29,7 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Jalankan Server (Port Dinamis untuk Railway)
+// Jalankan Server (Railway otomatis memberikan PORT)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server berjalan di port ${PORT}`);
