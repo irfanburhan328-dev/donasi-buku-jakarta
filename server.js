@@ -112,3 +112,38 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server berjalan di port ${PORT}`);
 });
+
+// Endpoint untuk mengambil seluruh daftar donasi (khusus Admin)
+app.get('/api/admin/donations', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM donasi ORDER BY created_at DESC'
+    );
+    res.json({ success: true, data: result.rows });
+  } catch (error) {
+    console.error('Error fetching admin donations:', error);
+    res.status(500).json({ success: false, message: 'Gagal mengambil data donasi' });
+  }
+});
+
+// Endpoint untuk memperbarui status donasi
+app.patch('/api/admin/donations/:id/status', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const result = await pool.query(
+      'UPDATE donasi SET status = $1 WHERE id = $2 RETURNING *',
+      [status, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ success: false, message: 'Data donasi tidak ditemukan' });
+    }
+
+    res.json({ success: true, data: result.rows[0] });
+  } catch (error) {
+    console.error('Error updating donation status:', error);
+    res.status(500).json({ success: false, message: 'Gagal memperbarui status' });
+  }
+});

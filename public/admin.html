@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Donasi Buku Jakarta</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen p-6 max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex justify-between items-center bg-white p-6 rounded-xl shadow-md mb-6">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-800">Dashboard Pengelolaan Donasi</h1>
+        <p class="text-gray-500 text-sm">Kelola status dan riwayat donasi buku masyarakat</p>
+      </div>
+      <a href="/" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition text-sm font-semibold">
+        ← Ke Halaman Utama
+      </a>
+    </div>
+
+    <!-- Tabel Donasi -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="p-4 border-b flex justify-between items-center">
+        <h2 class="text-lg font-semibold text-gray-700">Daftar Donasi Masuk</h2>
+        <button onclick="loadDonations()" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-blue-700">
+          🔄 Refresh
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wider border-b">
+              <th class="p-4">Tanggal</th>
+              <th class="p-4">Donatur</th>
+              <th class="p-4">Kontak</th>
+              <th class="p-4">Detail Buku</th>
+              <th class="p-4">Alamat Penjemputan</th>
+              <th class="p-4">Status</th>
+              <th class="p-4 text-center">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="donationTableBody" class="divide-y divide-gray-200 text-sm">
+            <tr>
+              <td colspan="7" class="p-6 text-center text-gray-500">Memuat data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadDonations() {
+      const tbody = document.getElementById('donationTableBody');
+      tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-500">Memuat data...</td></tr>`;
+
+      try {
+        const res = await fetch('/api/admin/donations');
+        const result = await res.json();
+
+        if (!result.success || result.data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-500">Belum ada data donasi.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = result.data.map(item => {
+          const tgl = new Date(item.created_at).toLocaleDateString('id-ID', {
+            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+          });
+
+          let statusBadge = 'bg-yellow-100 text-yellow-800';
+          if (item.status === 'Diproses') statusBadge = 'bg-blue-100 text-blue-800';
+          if (item.status === 'Selesai') statusBadge = 'bg-green-100 text-green-800';
+          if (item.status === 'Dibatalkan') statusBadge = 'bg-red-100 text-red-800';
+
+          return `
+            <tr class="hover:bg-gray-50 transition">
+              <td class="p-4 text-gray-500 text-xs">${tgl}</td>
+              <td class="p-4 font-medium text-gray-900">${item.nama}</td>
+              <td class="p-4 text-gray-600">
+                <div>${item.email}</div>
+                <div class="text-xs text-gray-400">${item.nomor_hp}</div>
+              </td>
+              <td class="p-4">
+                <div class="font-semibold text-gray-800">${item.judul_buku}</div>
+                <div class="text-xs text-gray-500">${item.jumlah_buku} Buku (${item.kategori_buku || '-'})</div>
+              </td>
+              <td class="p-4 text-gray-600 max-w-xs truncate">${item.alamat_penjemputan}</td>
+              <td class="p-4">
+                <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${statusBadge}">
+                  ${item.status || 'Pending'}
+                </span>
+              </td>
+              <td class="p-4 text-center">
+                <select onchange="updateStatus(${item.id}, this.value)" class="text-xs border rounded-lg p-1.5 bg-white font-medium focus:ring-2 focus:ring-blue-500">
+                  <option value="" disabled selected>Ubah Status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Diproses">Diproses</option>
+                  <option value="Selesai">Selesai</option>
+                  <option value="Dibatalkan">Dibatalkan</option>
+                </select>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-red-500">Gagal mengambil data.</td></tr>`;
+      }
+    }
+
+    async function updateStatus(id, newStatus) {
+      if (!confirm(`Ubah status donasi ini menjadi "${newStatus}"?`)) return;
+
+      try {
+        const res = await fetch(`/api/admin/donations/${id}/status`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          alert('Status berhasil diperbarui!');
+          loadDonations();
+        } else {
+          alert('Gagal memperbarui status: ' + result.message);
+        }
+      } catch (err) {
+        alert('Terjadi kesalahan jaringan.');
+      }
+    }
+
+    // Muat data saat halaman dibuka
+    document.addEventListener('DOMContentLoaded', loadDonations);
+  </script>
+</body>
+</html>
