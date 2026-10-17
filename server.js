@@ -1,135 +1,136 @@
 const express = require('express');
-const cors = require('cors');
 const { Pool } = require('pg');
 const path = require('path');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Koneksi ke Supabase PostgreSQL
+// Konfigurasi Koneksi Database PostgreSQL Supabase
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
-});
-
-// Otomatis Buat Tabel 'donasi' jika belum ada
-const initDb = async () => {
-  try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS donasi (
-        id SERIAL PRIMARY KEY,
-        nama VARCHAR(100) NOT NULL,
-        email VARCHAR(100) NOT NULL,
-        nomor_hp VARCHAR(20) NOT NULL,
-        judul_buku TEXT NOT NULL,
-        jumlah_buku INT NOT NULL,
-        kategori_buku VARCHAR(50),
-        alamat_penjemputan TEXT NOT NULL,
-        status VARCHAR(20) DEFAULT 'Pending',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      );
-    `);
-    console.log("Database initialized: Table 'donasi' ready.");
-  } catch (err) {
-    console.error("Error initializing database:", err.message);
-  }
-};
-initDb();
-
-// API Check Health
-app.get('/api/health', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json({ status: 'ok', time: result.rows[0].now });
-  } catch (err) {
-    res.status(500).json({ status: 'error', message: err.message });
+  ssl: {
+    rejectUnauthorized: false
   }
 });
 
-// API Submit Donasi Buku Baru
-app.post('/api/donasi', async (req, res) => {
+// Tes Koneksi Database saat Server Berjalan
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error('❌ Gagal terhubung ke Database Supabase:', err.stack);
+  } else {
+    console.log('✅ Berhasil terhubung ke Database Supabase!');
+    release();
+  }
+});
+
+// ==========================================
+// 1. ENDPOINT PUBLIK (FORM DONASI & STATS)
+// ==========================================
+
+// Endpoint untuk mengirim formulir donasi baru
+app.post('/api/donations', async (req, res) => {
   const { nama, email, nomor_hp, judul_buku, jumlah_buku, kategori_buku, alamat_penjemputan } = req.body;
 
   if (!nama || !email || !nomor_hp || !judul_buku || !jumlah_buku || !alamat_penjemputan) {
-    return res.status(400).json({ success: false, message: 'Semua field wajib diisi!' });
+    return res.status(400).json({
+      success: false,
+      message: 'Harap isi semua kolom wajib dalam formulir!'
+    });
   }
 
   try {
     const query = `
-      INSERT INTO donasi (nama, email, nomor_hp, judul_buku, jumlah_buku, kategori_buku, alamat_penjemputan)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *;
+      INSERT INTO donasi (nama, email, nomor_hp, judul_buku, jumlah_buku, kategori_buku, alamat_penjemputan, status)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, 'Pending')
+      RETURNING *
     `;
-    const values = [nama, email, nomor_hp, judul_buku, jumlah_buku, kategori_buku || 'Umum', alamat_penjemputan];
+    const values = [nama, email, nomor_hp, judul_buku, parseInt(jumlah_buku), kategori_buku || 'Umum', alamat_penjemputan];
+
     const result = await pool.query(query, values);
 
     res.status(201).json({
       success: true,
-      message: 'Terima kasih! Donasi buku Anda berhasil terdaftar.',
+      message: 'Donasi berhasil dikirim! Terima kasih atas kebaikan Anda.',
       data: result.rows[0]
     });
-  } catch (err) {
-    console.error("Error saving donation:", err);
-    res.status(500).json({ success: false, message: 'Gagal menyimpan data donasi ke server.' });
+  } catch (error) {
+    console.error('Error saving donation:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Gagal menyimpan data donasi ke server.'
+    });
   }
 });
 
-// API Statistik Dampak
+// Endpoint untuk statistik dampak real-time di halaman depan
 app.get('/api/stats', async (req, res) => {
   try {
-    const totalBukuResult = await pool.query('SELECT COALESCE(SUM(jumlah_buku), 0) AS total_buku, COUNT(*) AS total_donatur FROM donasi');
-    const { total_buku, total_donatur } = totalBukuResult.rows[0];
+    const query = `
+      SELECT 
+        COALESCE(SUM(jumlah_buku), 0) AS total_buku,
+        COUNT(DISTINCT id) AS total_donasi,
+        COUNT(DISTINCT email) AS total_donatur
+      FROM donasi
+    `;
+    const result = await pool.query(query);
+    const stats = result.rows[0];
 
     res.json({
       success: true,
-      stats: {
-        totalBuku: parseInt(total_buku) + 1250, // Base data awal + data realtime
-        totalDonatur: parseInt(total_donatur) + 180,
-        tbmTerbantu: 24,
-        wilayahJangkauan: 5
+      data: {
+        totalBuku: parseInt(stats.total_buku),
+        totalDonasi: parseInt(stats.total_donasi),
+        totalDonatur: parseInt(stats.total_donatur)
       }
     });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
+  } catch (error) {
+    console.error('Error fetching stats:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Gagal mengambil statistik donasi.'
+    });
   }
 });
 
-// API Ambil Daftar Donasi Buku
-app.get('/api/donasi', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM donasi ORDER BY created_at DESC');
-    res.json({ success: true, data: result.rows });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-});
+// ==========================================
+// 2. ENDPOINT ADMIN (MANAJEMEN DONASI)
+// ==========================================
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server berjalan di port ${PORT}`);
-});
-
-// Endpoint untuk mengambil seluruh daftar donasi (khusus Admin)
+// Endpoint mengambil seluruh daftar donasi untuk Admin Dashboard
 app.get('/api/admin/donations', async (req, res) => {
   try {
     const result = await pool.query(
       'SELECT * FROM donasi ORDER BY created_at DESC'
     );
-    res.json({ success: true, data: result.rows });
+    res.json({
+      success: true,
+      data: result.rows
+    });
   } catch (error) {
     console.error('Error fetching admin donations:', error);
-    res.status(500).json({ success: false, message: 'Gagal mengambil data donasi' });
+    res.status(500).json({
+      success: false,
+      message: 'Gagal mengambil data donasi admin.'
+    });
   }
 });
 
-// Endpoint untuk memperbarui status donasi
+// Endpoint memperbarui status donasi (Pending, Diproses, Selesai, Dibatalkan)
 app.patch('/api/admin/donations/:id/status', async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
+
+  if (!status) {
+    return res.status(400).json({ success: false, message: 'Status baru wajib diisi.' });
+  }
 
   try {
     const result = await pool.query(
@@ -138,12 +139,39 @@ app.patch('/api/admin/donations/:id/status', async (req, res) => {
     );
 
     if (result.rowCount === 0) {
-      return res.status(404).json({ success: false, message: 'Data donasi tidak ditemukan' });
+      return res.status(404).json({
+        success: false,
+        message: 'Data donasi tidak ditemukan.'
+      });
     }
 
-    res.json({ success: true, data: result.rows[0] });
+    res.json({
+      success: true,
+      message: 'Status donasi berhasil diperbarui!',
+      data: result.rows[0]
+    });
   } catch (error) {
-    console.error('Error updating donation status:', error);
-    res.status(500).json({ success: false, message: 'Gagal memperbarui status' });
+    console.error('Error updating status:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Gagal memperbarui status donasi.'
+    });
   }
+});
+
+// ==========================================
+// 3. ROUTING LANDING PAGE & ADMIN
+// ==========================================
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Jalankan Server
+app.listen(PORT, () => {
+  console.log(`🚀 Server Donasi Buku Jakarta berjalan di port ${PORT}`);
 });
