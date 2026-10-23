@@ -140,20 +140,38 @@
                         </div>
                     </div>
                     
+                    <!-- FITUR KATEGORI BUKU & JUMLAH BUKU -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Kategori Buku</label>
+                            <select id="kategori_buku" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition">
+                                <option value="" disabled selected>Pilih Jenis Buku</option>
+                                <option value="Buku Cerita Anak / Komik">📖 Buku Anak & Komik</option>
+                                <option value="Buku Pelajaran / Sekolah">📚 Buku Pelajaran & Sekolah</option>
+                                <option value="Novel / Sastra">📙 Novel & Sastra</option>
+                                <option value="Ensiklopedia / Pengetahuan">📗 Ensiklopedia & Pengetahuan</option>
+                                <option value="Lainnya">📦 Lainnya</option>
+                            </select>
+                        </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-1">Jumlah Buku (Pcs)</label>
                             <input type="number" id="jumlah_buku" min="1" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="Estimasi jumlah">
                         </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Metode Penyerahan</label>
-                            <select id="metode_pengiriman" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition">
-                                <option value="" disabled selected>Pilih Metode</option>
-                                <option value="Jemput Relawan">🚗 Di-jemput Relawan</option>
-                                <option value="Kirim JNE/JNT">📦 Kirim via Kurir (JNE/J&T)</option>
-                                <option value="Antar Mandiri">🏢 Antar Langsung ke Posko</option>
-                            </select>
-                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Judul / Deskripsi Singkat Buku</label>
+                        <input type="text" id="judul_buku" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="Contoh: Novel Laskar Pelangi, Buku IPA SMP Kelas 7, dll.">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Metode Penyerahan</label>
+                        <select id="metode_pengiriman" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition">
+                            <option value="" disabled selected>Pilih Metode</option>
+                            <option value="Jemput Relawan">🚗 Di-jemput Relawan</option>
+                            <option value="Kirim JNE/JNT">📦 Kirim via Kurir (JNE/J&T)</option>
+                            <option value="Antar Mandiri">🏢 Antar Langsung ke Posko</option>
+                        </select>
                     </div>
 
                     <div>
@@ -191,7 +209,7 @@
         </div>
 
         <!-- TAMPILAN 2: CONTENT DASHBOARD ADMIN (RAHASIA) -->
-        <div id="adminDashboardContent" class="bg-slate-900 border border-slate-800 w-full max-w-4xl rounded-3xl p-6 md:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto hidden">
+        <div id="adminDashboardContent" class="bg-slate-900 border border-slate-800 w-full max-w-5xl rounded-3xl p-6 md:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto hidden">
             <!-- Tombol Close Modal -->
             <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl font-bold p-2">
                 ✕
@@ -231,6 +249,7 @@
                         <tr>
                             <th class="p-3">Nama Donatur</th>
                             <th class="p-3">Email / WA</th>
+                            <th class="p-3">Kategori & Judul Buku</th>
                             <th class="p-3">Jumlah</th>
                             <th class="p-3">Metode</th>
                             <th class="p-3">Alamat / Catatan</th>
@@ -238,7 +257,7 @@
                     </thead>
                     <tbody id="adminTableBody" class="divide-y divide-slate-800">
                         <tr>
-                            <td colspan="5" class="text-center p-4 text-slate-500">Belum ada data donasi terbaru.</td>
+                            <td colspan="6" class="text-center p-4 text-slate-500">Belum ada data donasi terbaru.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -254,8 +273,7 @@
 
     <!-- SCRIPT LOGIK AUTHENTICATION ADMIN -->
     <script>
-        // Set Kata Sandi Admin di sini (Anda bisa mengganti 'admin123' sesuai keinginan)
-        const ADMIN_SECRET_PASSWORD = "kelompokc123";
+        const ADMIN_SECRET_PASSWORD = "admin123";
 
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
@@ -263,7 +281,6 @@
 
         function closeAdminModal() {
             document.getElementById('adminModal').classList.add('hidden');
-            // Reset input saat ditutup
             document.getElementById('adminPasswordInput').value = "";
             document.getElementById('passwordError').classList.add('hidden');
         }
@@ -274,12 +291,10 @@
             const errorMsg = document.getElementById('passwordError');
 
             if (inputPass === ADMIN_SECRET_PASSWORD) {
-                // Password benar -> Sembunyikan form auth & tampilkan dashboard admin
                 document.getElementById('adminAuthBox').classList.add('hidden');
                 document.getElementById('adminDashboardContent').classList.remove('hidden');
                 errorMsg.classList.add('hidden');
             } else {
-                // Password salah -> Tampilkan pesan error
                 errorMsg.classList.remove('hidden');
             }
         }
