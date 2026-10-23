@@ -1,327 +1,221 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donasi Buku Jakarta</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donasi Buku Jakarta</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Mengaktifkan scroll snap vertikal antar slide */
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        /* Mengatur tiap section menjadi 1 slide penuh (100vh) */
+        section {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Custom scrollbar disembunyikan agar tampilan seperti slide */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
-  
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto border-b border-slate-800">
-    <div class="flex items-center space-x-2 text-xl font-bold">
-      <span>📚</span>
-      <span>DonasiBukuJakarta</span>
-    </div>
-    <div class="hidden md:flex space-x-6 text-sm text-gray-300">
-      <a href="#dampak" class="hover:text-white transition">Dampak</a>
-      <a href="#donasi-form" class="hover:text-white transition">Form Donasi</a>
-      <a href="#admin-panel" class="text-amber-400 hover:underline font-semibold">Panel Admin</a>
-    </div>
-    <div>
-      <a href="#donasi-form" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-semibold px-4 py-2 rounded-lg transition text-sm">
-        Donasi Sekarang
-      </a>
-    </div>
-  </nav>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
 
-  <!-- Hero / Dampak Section -->
-  <section id="dampak" class="py-16 px-6 max-w-7xl mx-auto text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-amber-400 mb-3">Dampak & Transparansi</h2>
-    <p class="text-gray-400 mb-12 max-w-xl mx-auto">Jejak kebaikan warga Jakarta yang telah tersalurkan secara nyata.</p>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Card 1: Buku Terkumpul -->
-      <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-lg">
-        <div id="stat-buku" class="text-4xl font-extrabold text-cyan-400 mb-2">0+</div>
-        <div class="text-gray-400 text-sm">Buku Terkumpul</div>
-      </div>
-      <!-- Card 2: Donatur Bergabung -->
-      <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-lg">
-        <div id="stat-donatur" class="text-4xl font-extrabold text-amber-400 mb-2">0+</div>
-        <div class="text-gray-400 text-sm">Donatur Bergabung</div>
-      </div>
-      <!-- Card 3: TBM Terbantu -->
-      <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-lg">
-        <div id="stat-tbm" class="text-4xl font-extrabold text-emerald-400 mb-2">0</div>
-        <div class="text-gray-400 text-sm">TBM / Sekolah Terbantu</div>
-      </div>
-      <!-- Card 4: Wilayah Kota -->
-      <div class="bg-slate-800 border border-slate-700 p-6 rounded-2xl shadow-lg">
-        <div id="stat-wilayah" class="text-4xl font-extrabold text-purple-400 mb-2">0</div>
-        <div class="text-gray-400 text-sm">Wilayah Kota DKI</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Form Donasi Section -->
-  <section id="donasi-form" class="py-12 px-6 max-w-3xl mx-auto bg-slate-800 rounded-2xl shadow-xl my-12 border border-slate-700">
-    <h2 class="text-2xl font-bold text-center text-amber-400 mb-6">Formulir Donasi Buku</h2>
-    <form id="donationForm" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium mb-1">Nama Lengkap</label>
-        <input type="text" id="nama" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none">
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1">Email</label>
-          <input type="email" id="email" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none">
+    <!-- Navbar Floating (Tetap di Atas) -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2 font-bold text-xl tracking-wide text-white">
+            <span>📚</span>
+            <span>DonasiBuku<span class="text-cyan-400">Jakarta</span></span>
         </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Nomor HP / WhatsApp</label>
-          <input type="text" id="nomor_hp" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none">
+        <div class="hidden md:flex gap-6 text-sm font-medium text-slate-300 items-center">
+            <a href="#hero" class="hover:text-amber-400 transition">Beranda</a>
+            <a href="#dampak" class="hover:text-amber-400 transition">Dampak</a>
+            <a href="#donasi" class="hover:text-amber-400 transition">Formulir Donasi</a>
+            <!-- Tombol Buka Modal Admin -->
+            <button onclick="openAdminModal()" class="hover:text-amber-400 transition text-slate-400 flex items-center gap-1 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
+                ⚙️ Panel Admin
+            </button>
         </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium mb-1">Judul Buku</label>
-          <input type="text" id="judul_buku" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none">
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1">Jumlah Buku</label>
-          <input type="number" id="jumlah_buku" min="1" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none">
-        </div>
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Kategori Buku</label>
-        <input type="text" id="kategori_buku" placeholder="Misal: Pelajaran, Novel, Anak-anak" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none">
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Alamat Penjemputan</label>
-        <textarea id="alamat_penjemputan" rows="3" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white focus:ring-2 focus:ring-amber-500 outline-none"></textarea>
-      </div>
-      <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 rounded-lg transition">
-        Kirim Donasi Buku
-      </button>
-    </form>
-  </section>
+        <a href="#donasi" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition">
+            Donasi Sekarang
+        </a>
+    </nav>
 
-  <!-- Fitur Admin Panel (Digabung di Sini) -->
-  <section id="admin-panel" class="py-12 px-6 max-w-7xl mx-auto border-t border-slate-800 my-12">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-      <div>
-        <h2 class="text-2xl font-bold text-amber-400">Panel Kelola Admin</h2>
-        <p class="text-gray-400 text-sm">Lihat, ubah status, dan kelola seluruh data donasi masuk</p>
-      </div>
-      <div class="flex gap-3">
-        <button onclick="loadAdminDonations()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm font-semibold transition">
-          🔄 Refresh Data
-        </button>
-        <button onclick="clearAllDonations()" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm font-semibold transition">
-          🗑️ Kosongkan Semua Data
-        </button>
-      </div>
-    </div>
-
-    <!-- Tabel Admin -->
-    <div class="bg-slate-800 rounded-2xl shadow-xl overflow-hidden border border-slate-700">
-      <div class="overflow-x-auto">
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-slate-900 text-gray-300 text-xs uppercase tracking-wider border-b border-slate-700">
-              <th class="p-4">Tanggal</th>
-              <th class="p-4">Donatur</th>
-              <th class="p-4">Kontak</th>
-              <th class="p-4">Detail Buku</th>
-              <th class="p-4">Alamat Penjemputan</th>
-              <th class="p-4">Status</th>
-              <th class="p-4 text-center">Aksi / Status</th>
-            </tr>
-          </thead>
-          <tbody id="adminTableBody" class="divide-y divide-slate-700 text-sm text-gray-200">
-            <tr>
-              <td colspan="7" class="p-6 text-center text-gray-400">Memuat data admin...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <!-- Script JS (Menghubungkan Form, Stats, dan Fitur Admin) -->
-  <script>
-    // 1. Load Statistik Realtime untuk Bagian Dampak
-    async function loadStats() {
-      try {
-        const res = await fetch('/api/stats');
-        const result = await res.json();
-        if (result.success) {
-          document.getElementById('stat-buku').innerText = result.data.totalBuku + '+';
-          document.getElementById('stat-donatur').innerText = result.data.totalDonatur + '+';
-        }
-      } catch (err) {
-        console.error('Gagal memuat statistik:', err);
-      }
-    }
-
-    // 2. Submit Form Donasi
-    document.getElementById('donationForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = {
-        nama: document.getElementById('nama').value,
-        email: document.getElementById('email').value,
-        nomor_hp: document.getElementById('nomor_hp').value,
-        judul_buku: document.getElementById('judul_buku').value,
-        jumlah_buku: document.getElementById('jumlah_buku').value,
-        kategori_buku: document.getElementById('kategori_buku').value,
-        alamat_penjemputan: document.getElementById('alamat_penjemputan').value,
-      };
-
-      try {
-        const res = await fetch('/api/donations', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        const result = await res.json();
-        if (result.success) {
-          alert(result.message);
-          document.getElementById('donationForm').reset();
-          loadStats();
-          loadAdminDonations();
-        } else {
-          alert('Gagal: ' + result.message);
-        }
-      } catch (err) {
-        alert('Terjadi kesalahan jaringan.');
-      }
-    });
-
-    // 3. Load Data untuk Tabel Admin
-    async function loadAdminDonations() {
-      const tbody = document.getElementById('adminTableBody');
-      tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-400">Memuat data...</td></tr>`;
-
-      try {
-        const res = await fetch('/api/admin/donations');
-        const result = await res.json();
-
-        if (!result.success || result.data.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-400">Belum ada data donasi masuk.</td></tr>`;
-          return;
-        }
-
-        tbody.innerHTML = result.data.map(item => {
-          const tgl = new Date(item.created_at).toLocaleDateString('id-ID', {
-            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
-          });
-
-          let statusBadge = 'bg-yellow-900/60 text-yellow-300 border border-yellow-700';
-          if (item.status === 'Diproses') statusBadge = 'bg-blue-900/60 text-blue-300 border border-blue-700';
-          if (item.status === 'Selesai') statusBadge = 'bg-emerald-900/60 text-emerald-300 border border-emerald-700';
-          if (item.status === 'Dibatalkan') statusBadge = 'bg-red-900/60 text-red-300 border border-red-700';
-
-          return `
-            <tr class="hover:bg-slate-700/50 transition">
-              <td class="p-4 text-gray-400 text-xs">${tgl}</td>
-              <td class="p-4 font-medium text-white">${item.nama}</td>
-              <td class="p-4 text-gray-300">
-                <div>${item.email}</div>
-                <div class="text-xs text-gray-400">${item.nomor_hp}</div>
-              </td>
-              <td class="p-4">
-                <div class="font-semibold text-white">${item.judul_buku}</div>
-                <div class="text-xs text-gray-400">${item.jumlah_buku} Buku (${item.kategori_buku || '-'})</div>
-              </td>
-              <td class="p-4 text-gray-300 max-w-xs truncate">${item.alamat_penjemputan}</td>
-              <td class="p-4">
-                <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${statusBadge}">
-                  ${item.status || 'Pending'}
+    <!-- SLIDE 1: HERO / BERANDA -->
+    <section id="hero" class="relative text-center px-4">
+        <div class="max-w-3xl mx-auto space-y-6 mt-12">
+            <span class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-amber-400 uppercase bg-amber-400/10 rounded-full border border-amber-400/20">
+                Gerakan Literasi Ibu Kota
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                Salurkan Buku Bekasmu, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+                    Nyalakan Jendela Dunia
                 </span>
-              </td>
-              <td class="p-4 text-center space-y-2">
-                <select onchange="updateStatus(${item.id}, this.value)" class="text-xs border border-slate-600 rounded-lg p-1.5 bg-slate-900 text-white font-medium focus:ring-2 focus:ring-amber-500 block w-full">
-                  <option value="" disabled selected>Ubah Status</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Diproses">Diproses</option>
-                  <option value="Selesai">Selesai</option>
-                  <option value="Dibatalkan">Dibatalkan</option>
-                </select>
-                <button onclick="deleteDonation(${item.id})" class="bg-red-600 text-white px-3 py-1 rounded text-xs hover:bg-red-700 w-full font-medium transition">
-                  🗑️ Hapus
-                </button>
-              </td>
-            </tr>
-          `;
-        }).join('');
-      } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-red-400">Gagal mengambil data admin.</td></tr>`;
-      }
-    }
+            </h1>
+            <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto">
+                Bantu anak-anak di Taman Bacaan Masyarakat (TBM) Jakarta mengakses bacaan berkualitas dengan mendonasikan buku layak pakaimu.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+                <a href="#donasi" class="w-full sm:w-auto px-8 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 transition">
+                    Mulai Donasi
+                </a>
+                <a href="#dampak" class="w-full sm:w-auto px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl border border-slate-700 transition">
+                    Lihat Dampak
+                </a>
+            </div>
+        </div>
+    </section>
 
-    // 4. Ubah Status Donasi
-    async function updateStatus(id, newStatus) {
-      if (!confirm(`Ubah status donasi ini menjadi "${newStatus}"?`)) return;
+    <!-- SLIDE 2: DAMPAK & TRANSPARANSI -->
+    <section id="dampak" class="bg-slate-900/50 w-full">
+        <div class="max-w-5xl mx-auto text-center px-4 w-full">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-3">
+                Dampak & <span class="text-amber-400">Transparansi</span>
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto mb-12">
+                Jejak kebaikan warga Jakarta yang telah tersalurkan secara nyata.
+            </p>
 
-      try {
-        const res = await fetch(`/api/admin/donations/${id}/status`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status: newStatus })
-        });
-        const result = await res.json();
+            <!-- Grid 4 Kartu Statistik -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                <!-- Kartu 1 -->
+                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-buku" class="text-3xl md:text-4xl font-extrabold text-cyan-400 mb-2">0</div>
+                    <p class="text-slate-400 text-xs md:text-sm font-medium">Buku Terkumpul</p>
+                </div>
+                <!-- Kartu 2 -->
+                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-donatur" class="text-3xl md:text-4xl font-extrabold text-amber-400 mb-2">0</div>
+                    <p class="text-slate-400 text-xs md:text-sm font-medium">Donatur Bergabung</p>
+                </div>
+                <!-- Kartu 3 -->
+                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-tbm" class="text-3xl md:text-4xl font-extrabold text-emerald-400 mb-2">0</div>
+                    <p class="text-slate-400 text-xs md:text-sm font-medium">TBM / Sekolah Terbantu</p>
+                </div>
+                <!-- Kartu 4 -->
+                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-wilayah" class="text-3xl md:text-4xl font-extrabold text-purple-400 mb-2">0</div>
+                    <p class="text-slate-400 text-xs md:text-sm font-medium">Wilayah Kota DKI</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        if (result.success) {
-          alert('Status berhasil diperbarui!');
-          loadAdminDonations();
-        } else {
-          alert('Gagal memperbarui status: ' + result.message);
+    <!-- SLIDE 3: FORMULIR DONASI -->
+    <section id="donasi" class="w-full">
+        <div class="max-w-xl mx-auto w-full px-4">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
+                <h3 class="text-2xl font-bold text-white text-center mb-2">Formulir Donasi Buku</h3>
+                <p class="text-slate-400 text-xs md:text-sm text-center mb-6">Isi data singkat untuk menjadwalkan penyerahan buku Anda.</p>
+                
+                <form id="donationForm" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Lengkap</label>
+                        <input type="text" id="nama" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="Contoh: Budi Santoso">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Email</label>
+                            <input type="email" id="email" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="email@domain.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor WhatsApp</label>
+                            <input type="tel" id="whatsapp" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="08123456789">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Jumlah Buku (Pcs)</label>
+                        <input type="number" id="jumlah_buku" min="1" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="Masukan estimasi jumlah buku">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition mt-2">
+                        Kirimkan Donasi
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL INTEGRASI PANEL ADMIN -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-4xl rounded-3xl p-6 md:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <!-- Tombol Close Modal -->
+            <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl font-bold p-2">
+                ✕
+            </button>
+
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-2xl">⚙️</span>
+                <h2 class="text-2xl font-bold text-white">Panel Kelola Admin</h2>
+            </div>
+
+            <!-- Ringkasan Data Admin -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
+                    <p class="text-xs text-slate-400">Total Donasi</p>
+                    <p id="adminTotalDonasi" class="text-xl font-bold text-cyan-400">0 Record</p>
+                </div>
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
+                    <p class="text-xs text-slate-400">Total Buku</p>
+                    <p id="adminTotalBuku" class="text-xl font-bold text-amber-400">0 Pcs</p>
+                </div>
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
+                    <p class="text-xs text-slate-400">Status Database</p>
+                    <p class="text-xl font-bold text-emerald-400">Terhubung</p>
+                </div>
+            </div>
+
+            <!-- Tabel Riwayat Donasi -->
+            <h3 class="text-lg font-semibold text-slate-200 mb-3">Daftar Entry Donasi Masuk</h3>
+            <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/50">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
+                        <tr>
+                            <th class="p-3">Nama Donatur</th>
+                            <th class="p-3">Email</th>
+                            <th class="p-3">WhatsApp</th>
+                            <th class="p-3">Jumlah Buku</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody" class="divide-y divide-slate-800">
+                        <tr>
+                            <td colspan="4" class="text-center p-4 text-slate-500">Belum ada data donasi terbaru.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Ringkas di Bagian Bawah -->
+    <footer class="fixed bottom-2 w-full text-center text-xs text-slate-500 pointer-events-none">
+        © 2026 Donasi Buku Jakarta. All rights reserved.
+    </footer>
+
+    <!-- SCRIPT LOGIK MODAL ADMIN -->
+    <script>
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
         }
-      } catch (err) {
-        alert('Terjadi kesalahan jaringan.');
-      }
-    }
 
-    // 5. Hapus 1 Data Donasi
-    async function deleteDonation(id) {
-      if (!confirm('Apakah Anda yakin ingin menghapus data donasi ini?')) return;
-
-      try {
-        const res = await fetch(`/api/admin/donations/${id}`, {
-          method: 'DELETE'
-        });
-        const result = await res.json();
-
-        if (result.success) {
-          alert('Data donasi berhasil dihapus!');
-          loadStats();
-          loadAdminDonations();
-        } else {
-          alert('Gagal menghapus data: ' + result.message);
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
         }
-      } catch (err) {
-        alert('Terjadi kesalahan jaringan.');
-      }
-    }
-
-    // 6. Kosongkan Seluruh Data
-    async function clearAllDonations() {
-      if (!confirm('PERINGATAN: Tindakan ini akan menghapus SELURUH data donasi dan mereset statistik menjadi 0. Lanjutkan?')) return;
-
-      try {
-        const res = await fetch('/api/admin/donations-clear', {
-          method: 'DELETE'
-        });
-        const result = await res.json();
-
-        if (result.success) {
-          alert('Semua data donasi berhasil dikosongkan!');
-          loadStats();
-          loadAdminDonations();
-        } else {
-          alert('Gagal mengosongkan data: ' + result.message);
-        }
-      } catch (err) {
-        alert('Terjadi kesalahan jaringan.');
-      }
-    }
-
-    // Jalankan fungsi saat halaman pertama dimuat
-    document.addEventListener('DOMContentLoaded', () => {
-      loadStats();
-      loadAdminDonations();
-    });
-  </script>
+    </script>
 </body>
 </html>
