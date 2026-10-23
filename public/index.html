@@ -3,243 +3,185 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donasi Buku Jakarta</title>
+  <title>Admin Dashboard - Donasi Buku Jakarta</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-900 text-white font-sans scroll-smooth">
-
-  <!-- Navbar -->
-  <nav class="flex items-center justify-between px-8 py-4 bg-slate-800/80 backdrop-blur sticky top-0 z-50 border-b border-slate-700">
-    <div class="text-2xl font-bold text-amber-400">📚 DonasiBuku<span class="text-cyan-400">Jakarta</span></div>
-    <div class="space-x-6 text-slate-300 font-medium hidden md:block">
-      <a href="#about" class="hover:text-amber-400 transition">Tentang Kami</a>
-      <a href="#flow" class="hover:text-amber-400 transition">Alur Donasi</a>
-      <a href="#dampak" class="hover:text-amber-400 transition">Dampak</a>
-      <a href="#form-donasi" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-4 py-2 rounded-lg transition">Donasi Sekarang</a>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="text-center py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
-    <span class="bg-cyan-900/50 text-cyan-300 text-xs px-4 py-1.5 rounded-full border border-cyan-500/30 font-semibold tracking-wide">
-      Gerakan Literasi Warga Jakarta
-    </span>
-    <h1 class="text-4xl md:text-6xl font-extrabold mt-6 max-w-4xl mx-auto leading-tight">
-      Salurkan Buku Tak Terpakai,<br>
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-400">
-        Buka Jendela Dunia Anak Bangsa
-      </span>
-    </h1>
-    <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-lg">
-      Platform penyaluran buku layak baca langsung ke sekolah, taman baca masyarakat, dan lembaga sosial yang membutuhkan di wilayah DKI Jakarta.
-    </p>
-    <div class="mt-8 space-x-4">
-      <a href="#form-donasi" class="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold px-6 py-3 rounded-xl shadow-lg transition inline-block">Donasi Buku Sekarang</a>
-      <a href="#flow" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 px-6 py-3 rounded-xl transition inline-block">Pelajari Alur</a>
-    </div>
-  </section>
-
-  <!-- Section About -->
-  <section id="about" class="py-16 px-8 max-w-5xl mx-auto">
-    <h2 class="text-3xl font-bold text-center text-amber-400 mb-8">Tentang Kami</h2>
-    <div class="bg-slate-800 border border-slate-700 p-8 rounded-2xl text-slate-300 leading-relaxed text-center shadow-xl">
-      Donasi Buku Jakarta adalah inisiatif sosial berbasis komunitas yang bertujuan untuk menjembatani pemilik buku dengan anak-anak dan ruang baca yang membutuhkan di seluruh penjuru Jakarta. Kami percaya setiap buku punya kesempatan kedua untuk menginspirasi kehidupan anak-anak bangsa.
-    </div>
-  </section>
-
-  <!-- Section Alur Donasi -->
-  <section id="flow" class="py-16 px-8 bg-slate-800/50">
-    <h2 class="text-3xl font-bold text-center text-cyan-400 mb-12">Alur Donasi Buku</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center shadow-lg">
-        <div class="text-4xl mb-4">📝</div>
-        <h3 class="text-xl font-bold text-amber-400 mb-2">1. Isi Form</h3>
-        <p class="text-slate-400 text-sm">Lengkapi data buku dan alamat lokasi penjemputan atau pengiriman.</p>
-      </div>
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center shadow-lg">
-        <div class="text-4xl mb-4">📦</div>
-        <h3 class="text-xl font-bold text-amber-400 mb-2">2. Packing & Serahkan</h3>
-        <p class="text-slate-400 text-sm">Kemas buku secara rapi. Kurir relawan kami siap menjemput buku Anda.</p>
-      </div>
-      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 text-center shadow-lg">
-        <div class="text-4xl mb-4">📖</div>
-        <h3 class="text-xl font-bold text-amber-400 mb-2">3. Penyaluran</h3>
-        <p class="text-slate-400 text-sm">Buku disalurkan langsung ke TBM (Taman Baca Masyarakat) penerima manfaat.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Section Dampak (NEW) -->
-  <section id="dampak" class="py-20 px-8 max-w-6xl mx-auto">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-amber-400 mb-3">Dampak & Transparansi</h2>
-      <p class="text-slate-400">Jejak kebaikan warga Jakarta yang telah tersalurkan secara nyata.</p>
-    </div>
-
-    <!-- Stat Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
-        <div id="statBuku" class="text-3xl md:text-4xl font-extrabold text-cyan-400">1,250+</div>
-        <div class="text-slate-400 text-sm mt-2">Buku Terkumpul</div>
-      </div>
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
-        <div id="statDonatur" class="text-3xl md:text-4xl font-extrabold text-amber-400">180+</div>
-        <div class="text-slate-400 text-sm mt-2">Donatur Bergabung</div>
-      </div>
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
-        <div id="statTbm" class="text-3xl md:text-4xl font-extrabold text-emerald-400">24</div>
-        <div class="text-slate-400 text-sm mt-2">TBM / Sekolah Terbantu</div>
-      </div>
-      <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl text-center shadow-lg">
-        <div id="statWilayah" class="text-3xl md:text-4xl font-extrabold text-purple-400">5</div>
-        <div class="text-slate-400 text-sm mt-2">Wilayah Kota DKI</div>
-      </div>
-    </div>
-
-    <!-- Testimonial / Story Card -->
-    <div class="bg-gradient-to-r from-slate-800 to-slate-800/90 border border-slate-700 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center gap-8 shadow-xl">
-      <div class="text-6xl">🏫</div>
+<body class="bg-gray-100 font-sans">
+  <div class="min-h-screen p-6 max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex justify-between items-center bg-white p-6 rounded-xl shadow-md mb-6">
       <div>
-        <p class="text-slate-300 italic text-lg mb-4">
-          "Terima kasih untuk para donatur Donasi Buku Jakarta. Koleksi bacaan di Taman Baca kami di Jakarta Utara kini makin beragam dan anak-anak jadi makin semangat membaca setiap sore."
-        </p>
-        <div class="font-bold text-amber-400">— Pengelola TBM Kampung Nelayan, Cilincing</div>
+        <h1 class="text-2xl font-bold text-gray-800">Dashboard Pengelolaan Donasi</h1>
+        <p class="text-gray-500 text-sm">Kelola status dan riwayat donasi buku masyarakat</p>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="clearAllDonations()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition text-sm font-semibold">
+          🗑️ Kosongkan Semua Data
+        </button>
+        <a href="/" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition text-sm font-semibold">
+          ← Ke Halaman Utama
+        </a>
       </div>
     </div>
-  </section>
 
-  <!-- Section Form Donasi -->
-  <section id="form-donasi" class="py-20 px-4 bg-slate-800/30">
-    <div class="max-w-2xl mx-auto bg-slate-800 border border-slate-700 p-8 rounded-2xl shadow-2xl">
-      <h2 class="text-2xl font-bold text-amber-400 text-center mb-2">Formulir Donasi Buku</h2>
-      <p class="text-slate-400 text-center text-sm mb-6">Isi data di bawah ini untuk memulai donasi buku Anda.</p>
-
-      <form id="donasiForm" class="space-y-4">
-        <div>
-          <label class="block text-sm font-semibold text-slate-300 mb-1">Nama Lengkap</label>
-          <input type="text" id="nama" required placeholder="Contoh: Budi Santoso" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400">
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-1">Email</label>
-            <input type="email" id="email" required placeholder="budi@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-1">Nomor WhatsApp/HP</label>
-            <input type="tel" id="nomor_hp" required placeholder="081234567890" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-1">Judul / Detail Buku</label>
-            <input type="text" id="judul_buku" required placeholder="Buku Cerita, Novel, Pelajaran..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400">
-          </div>
-          <div>
-            <label class="block text-sm font-semibold text-slate-300 mb-1">Jumlah Buku (Pcs)</label>
-            <input type="number" id="jumlah_buku" required min="1" placeholder="5" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400">
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-slate-300 mb-1">Kategori Buku</label>
-          <select id="kategori_buku" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400">
-            <option value="Buku Anak">Buku Anak / Dongeng</option>
-            <option value="Pelajaran">Pelajaran Sekolah</option>
-            <option value="Novel/Komik">Novel & Komik</option>
-            <option value="Pengetahuan Umum">Pengetahuan Umum</option>
-            <option value="Lainnya">Lainnya</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-slate-300 mb-1">Alamat Penjemputan / Alamat Anda</label>
-          <textarea id="alamat_penjemputan" required rows="3" placeholder="Jl. Sudirman No. 12, Kebayoran Baru, Jakarta Selatan" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-amber-400"></textarea>
-        </div>
-
-        <button type="submit" id="btnSubmit" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold py-3 rounded-xl transition">
-          Kirim Donasi Buku
+    <!-- Tabel Donasi -->
+    <div class="bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="p-4 border-b flex justify-between items-center">
+        <h2 class="text-lg font-semibold text-gray-700">Daftar Donasi Masuk</h2>
+        <button onclick="loadDonations()" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm hover:bg-blue-700">
+          🔄 Refresh
         </button>
-      </form>
+      </div>
 
-      <div id="alertMsg" class="hidden mt-4 p-4 rounded-lg text-center font-semibold"></div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wider border-b">
+              <th class="p-4">Tanggal</th>
+              <th class="p-4">Donatur</th>
+              <th class="p-4">Kontak</th>
+              <th class="p-4">Detail Buku</th>
+              <th class="p-4">Alamat Penjemputan</th>
+              <th class="p-4">Status</th>
+              <th class="p-4 text-center">Aksi / Status</th>
+            </tr>
+          </thead>
+          <tbody id="donationTableBody" class="divide-y divide-gray-200 text-sm">
+            <tr>
+              <td colspan="7" class="p-6 text-center text-gray-500">Memuat data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Footer -->
-  <footer class="py-8 text-center text-slate-500 border-t border-slate-800 text-sm">
-    © 2026 Donasi Buku Jakarta. Seluruh hak cipta dilindungi.
-  </footer>
-
-  <!-- Script Integrasi API & Stats -->
   <script>
-    // Fetch Dampak Stats Realtime
-    async function fetchStats() {
+    async function loadDonations() {
+      const tbody = document.getElementById('donationTableBody');
+      tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-500">Memuat data...</td></tr>`;
+
       try {
-        const res = await fetch('/api/stats');
-        const data = await res.json();
-        if (data.success) {
-          document.getElementById('statBuku').innerText = data.stats.totalBuku.toLocaleString('id-ID') + '+';
-          document.getElementById('statDonatur').innerText = data.stats.totalDonatur.toLocaleString('id-ID') + '+';
-          document.getElementById('statTbm').innerText = data.stats.tbmTerbantu;
-          document.getElementById('statWilayah').innerText = data.stats.wilayahJangkauan;
+        const res = await fetch('/api/admin/donations');
+        const result = await res.json();
+
+        if (!result.success || result.data.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-gray-500">Belum ada data donasi.</td></tr>`;
+          return;
         }
+
+        tbody.innerHTML = result.data.map(item => {
+          const tgl = new Date(item.created_at).toLocaleDateString('id-ID', {
+            day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+          });
+
+          let statusBadge = 'bg-yellow-100 text-yellow-800';
+          if (item.status === 'Diproses') statusBadge = 'bg-blue-100 text-blue-800';
+          if (item.status === 'Selesai') statusBadge = 'bg-green-100 text-green-800';
+          if (item.status === 'Dibatalkan') statusBadge = 'bg-red-100 text-red-800';
+
+          return `
+            <tr class="hover:bg-gray-50 transition">
+              <td class="p-4 text-gray-500 text-xs">${tgl}</td>
+              <td class="p-4 font-medium text-gray-900">${item.nama}</td>
+              <td class="p-4 text-gray-600">
+                <div>${item.email}</div>
+                <div class="text-xs text-gray-400">${item.nomor_hp}</div>
+              </td>
+              <td class="p-4">
+                <div class="font-semibold text-gray-800">${item.judul_buku}</div>
+                <div class="text-xs text-gray-500">${item.jumlah_buku} Buku (${item.kategori_buku || '-'})</div>
+              </td>
+              <td class="p-4 text-gray-600 max-w-xs truncate">${item.alamat_penjemputan}</td>
+              <td class="p-4">
+                <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${statusBadge}">
+                  ${item.status || 'Pending'}
+                </span>
+              </td>
+              <td class="p-4 text-center space-y-2">
+                <select onchange="updateStatus(${item.id}, this.value)" class="text-xs border rounded-lg p-1.5 bg-white font-medium focus:ring-2 focus:ring-blue-500 block w-full">
+                  <option value="" disabled selected>Ubah Status</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Diproses">Diproses</option>
+                  <option value="Selesai">Selesai</option>
+                  <option value="Dibatalkan">Dibatalkan</option>
+                </select>
+                <button onclick="deleteDonation(${item.id})" class="bg-red-500 text-white px-3 py-1 rounded text-xs hover:bg-red-600 w-full font-medium">
+                  🗑️ Hapus
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
       } catch (err) {
-        console.log('Gagal memuat statistik realtime');
+        tbody.innerHTML = `<tr><td colspan="7" class="p-6 text-center text-red-500">Gagal mengambil data.</td></tr>`;
       }
     }
-    fetchStats();
 
-    // Form Donasi Handler
-    const form = document.getElementById('donasiForm');
-    const alertMsg = document.getElementById('alertMsg');
-    const btnSubmit = document.getElementById('btnSubmit');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      btnSubmit.disabled = true;
-      btnSubmit.innerText = 'Mengirim...';
-
-      const data = {
-        nama: document.getElementById('nama').value,
-        email: document.getElementById('email').value,
-        nomor_hp: document.getElementById('nomor_hp').value,
-        judul_buku: document.getElementById('judul_buku').value,
-        jumlah_buku: parseInt(document.getElementById('jumlah_buku').value),
-        kategori_buku: document.getElementById('kategori_buku').value,
-        alamat_penjemputan: document.getElementById('alamat_penjemputan').value
-      };
+    async function updateStatus(id, newStatus) {
+      if (!confirm(`Ubah status donasi ini menjadi "${newStatus}"?`)) return;
 
       try {
-        const response = await fetch('/api/donasi', {
-          method: 'POST',
+        const res = await fetch(`/api/admin/donations/${id}/status`, {
+          method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify({ status: newStatus })
         });
-
-        const result = await response.json();
-        alertMsg.classList.remove('hidden', 'bg-red-900/50', 'text-red-300', 'bg-green-900/50', 'text-green-300');
+        const result = await res.json();
 
         if (result.success) {
-          alertMsg.classList.add('bg-green-900/50', 'text-green-300');
-          alertMsg.innerText = result.message;
-          form.reset();
-          fetchStats(); // Update angka statistik secara otomatis setelah donasi dikirim
+          alert('Status berhasil diperbarui!');
+          loadDonations();
         } else {
-          alertMsg.classList.add('bg-red-900/50', 'text-red-300');
-          alertMsg.innerText = result.message || 'Gagal mengirim data.';
+          alert('Gagal memperbarui status: ' + result.message);
         }
       } catch (err) {
-        alertMsg.classList.remove('hidden');
-        alertMsg.classList.add('bg-red-900/50', 'text-red-300');
-        alertMsg.innerText = 'Terjadi kesalahan koneksi ke server.';
-      } finally {
-        btnSubmit.disabled = false;
-        btnSubmit.innerText = 'Kirim Donasi Buku';
+        alert('Terjadi kesalahan jaringan.');
       }
-    });
-  </script>
+    }
 
+    async function deleteDonation(id) {
+      if (!confirm('Apakah Anda yakin ingin menghapus data donasi ini?')) return;
+
+      try {
+        const res = await fetch(`/api/admin/donations/${id}`, {
+          method: 'DELETE'
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          alert('Data donasi berhasil dihapus!');
+          loadDonations();
+        } else {
+          alert('Gagal menghapus data: ' + result.message);
+        }
+      } catch (err) {
+        alert('Terjadi kesalahan jaringan.');
+      }
+    }
+
+    async function clearAllDonations() {
+      if (!confirm('PERINGATAN: Tindakan ini akan menghapus SELURUH data donasi dan mereset statistik website menjadi 0. Lanjutkan?')) return;
+
+      try {
+        const res = await fetch('/api/admin/donations-clear', {
+          method: 'DELETE'
+        });
+        const result = await res.json();
+
+        if (result.success) {
+          alert('Semua data donasi berhasil dikosongkan!');
+          loadDonations();
+        } else {
+          alert('Gagal mengosongkan data: ' + result.message);
+        }
+      } catch (err) {
+        alert('Terjadi kesalahan jaringan.');
+      }
+    }
+
+    // Muat data saat halaman dibuka
+    document.addEventListener('DOMContentLoaded', loadDonations);
+  </script>
 </body>
 </html>
