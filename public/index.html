@@ -33,6 +33,17 @@
             width: 0px;
             background: transparent;
         }
+
+        /* Styling khusus animasi panah accordion FAQ */
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .icon-arrow {
+            transition: transform 0.2s ease;
+        }
+        details[open] summary .icon-arrow {
+            transform: rotate(90deg);
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-900">
@@ -187,22 +198,94 @@
         </div>
     </section>
 
-    <!-- SLIDE 4: POSKO & PETA TBM INTERAKTIF (KOSONG / PLACEHOLDER) -->
+    <!-- SLIDE 4: POSKO & PETA TBM INTERAKTIF -->
     <section id="posko" class="w-full bg-slate-900/40 py-12">
-        <div class="max-w-3xl mx-auto text-center px-4 my-auto space-y-4">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white">
-                Posko & <span class="text-cyan-400">Peta TBM Interaktif</span>
-            </h2>
-            <p class="text-slate-400 text-xs md:text-sm max-w-lg mx-auto">
-                Cari dan temukan titik lokasi penyerahan buku secara mandiri di wilayah DKI Jakarta.
-            </p>
-
-            <div class="p-12 bg-slate-900 border border-slate-800 rounded-3xl text-center space-y-3">
-                <div class="text-5xl">📍</div>
-                <h3 class="text-xl font-bold text-white">Data Lokasi TBM Segera Hadir</h3>
-                <p class="text-slate-400 text-xs max-w-md mx-auto">
-                    Saat ini titik lokasi posko dan integrasi peta TBM interaktif sedang dalam tahap verifikasi alamat oleh tim relawan.
+        <div class="max-w-6xl mx-auto px-4 my-auto w-full space-y-6">
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white">
+                    Posko & <span class="text-cyan-400">Peta TBM Interaktif</span>
+                </h2>
+                <p class="text-slate-400 text-xs md:text-sm max-w-lg mx-auto mt-1">
+                    Cari dan temukan titik lokasi penyerahan buku secara mandiri di wilayah DKI Jakarta.
                 </p>
+            </div>
+
+            <!-- Layout Grid 2 Kolom: Kiri Posko (Kosong/Siap Diisi), Kanan Peta -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                
+                <!-- KOLOM KIRI: DAFTAR POSKO (KOSONG DENGAN PLACEHOLDER SIAP ISI) -->
+                <div class="lg:col-span-5 bg-slate-900/80 border border-slate-800 rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+                            <span>🏢</span> Daftar Posko Penerimaan
+                        </h3>
+                        <p class="text-slate-400 text-xs mb-4">Posko tempat Anda dapat menyerahkan buku secara langsung.</p>
+                        
+                        <!-- Container Tempat List Posko (Nanti dapat diisi div posko di sini) -->
+                        <div id="poskoListContainer" class="space-y-3">
+                            <!-- TAMPILAN KOSONG / PLACEHOLDER -->
+                            <div class="p-8 border border-dashed border-slate-800 rounded-2xl text-center space-y-2 my-auto">
+                                <div class="text-3xl opacity-50">📋</div>
+                                <h4 class="text-sm font-semibold text-slate-300">Belum Ada Posko Terdaftar</h4>
+                                <p class="text-[11px] text-slate-500">
+                                    Daftar alamat posko penerimaan sedang disiapkan oleh tim relawan. Anda tetap dapat melihat peta di samping.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800/80 text-center">
+                        <p class="text-[11px] text-slate-400">
+                            Ingin menjadikan tempat Anda sebagai Posko TBM? <br>
+                            <a href="#kontak" class="text-cyan-400 font-semibold hover:underline">Hubungi Tim Relawan</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN: PETA INTERAKTIF GOOGLE MAPS -->
+                <div class="lg:col-span-7 bg-slate-900/80 border border-slate-800 rounded-3xl p-4 flex flex-col">
+                    <div class="flex justify-between items-center mb-3 px-2">
+                        <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                            <span class="text-amber-400">📍</span> Titik Peta TBM DKI Jakarta
+                        </span>
+                        <span id="mapPointTitle" class="text-[10px] bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 px-2 py-0.5 rounded-full font-medium">
+                            Peta Monas & Sekitarnya
+                        </span>
+                    </div>
+
+                    <!-- Embed Google Maps Interaktif (Dapat Diubah Titik Lat,Long-nya) -->
+                    <div class="w-full h-80 lg:h-96 rounded-2xl overflow-hidden border border-slate-800 relative">
+                        <iframe 
+                            id="gmapIframe"
+                            class="w-full h-full border-0"
+                            src="https://maps.google.com/maps?q=-6.175392,106.827153&z=13&output=embed"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <!-- Pilihan Cepat Titik Lokasi Peta (Dapat Ditambah/Disesuaikan) -->
+                    <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-800/80 text-[11px]">
+                        <span class="text-slate-400 self-center">Set Titik Peta:</span>
+                        <button onclick="setMapLocation(-6.175392, 106.827153, 'Jakarta Pusat (Monas)')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition">
+                            🏛️ Jakpus
+                        </button>
+                        <button onclick="setMapLocation(-6.261493, 106.810600, 'Jakarta Selatan (Blok M)')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition">
+                            🌳 Jaksel
+                        </button>
+                        <button onclick="setMapLocation(-6.225014, 106.900447, 'Jakarta Timur (Jatinegara)')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition">
+                            🚃 Jaktim
+                        </button>
+                        <button onclick="setMapLocation(-6.168329, 106.786888, 'Jakarta Barat (Grogol)')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition">
+                            🏙️ Jakbar
+                        </button>
+                        <button onclick="setMapLocation(-6.121435, 106.882681, 'Jakarta Utara (Tanjung Priok)')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-lg transition">
+                            🌊 Jakut
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -276,9 +359,9 @@
         </div>
     </section>
 
-    <!-- SLIDE 6: PERTANYAAN UMUM (FAQ) -->
+    <!-- SLIDE 6: PERTANYAAN UMUM (FAQ) ACCORDION INTERAKTIF -->
     <section id="faq" class="w-full bg-slate-900/50 py-12">
-        <div class="max-w-3xl mx-auto px-4 my-auto text-center space-y-8">
+        <div class="max-w-3xl mx-auto px-4 my-auto text-center space-y-8 w-full">
             <div>
                 <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-2">
                     Pertanyaan <span class="text-amber-400">Umum (FAQ)</span>
@@ -286,33 +369,43 @@
                 <p class="text-slate-400 text-xs md:text-sm">Hal-hal yang sering ditanyakan oleh calon donatur.</p>
             </div>
 
+            <!-- FAQ Accordions -->
             <div class="space-y-4 text-left">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-                    <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
-                        <span class="text-amber-400">▼</span> Apakah layanan penjemputan buku berbayar?
-                    </h3>
-                    <p class="text-xs text-slate-400 leading-relaxed pl-5">
+                <details class="bg-slate-900 border border-slate-800 rounded-2xl p-5 transition group cursor-pointer" open>
+                    <summary class="text-sm font-bold text-white flex items-center justify-between list-none select-none">
+                        <span class="flex items-center gap-2">
+                            <span class="icon-arrow text-amber-400 text-xs">▶</span>
+                            Apakah layanan penjemputan buku berbayar?
+                        </span>
+                    </summary>
+                    <p class="text-xs text-slate-400 leading-relaxed pl-5 pt-3 mt-2 border-t border-slate-800/60">
                         Layanan penjemputan relawan kami gratis untuk wilayah DKI Jakarta dengan kuota minimal 15 buku. Jika di bawah 15 buku, kami menyarankan pengiriman via kurir atau diantar mandiri.
                     </p>
-                </div>
+                </details>
 
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-                    <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
-                        <span class="text-amber-400">▼</span> Ke mana buku donasi saya akan disalurkan?
-                    </h3>
-                    <p class="text-xs text-slate-400 leading-relaxed pl-5">
+                <details class="bg-slate-900 border border-slate-800 rounded-2xl p-5 transition group cursor-pointer">
+                    <summary class="text-sm font-bold text-white flex items-center justify-between list-none select-none">
+                        <span class="flex items-center gap-2">
+                            <span class="icon-arrow text-amber-400 text-xs">▶</span>
+                            Ke mana buku donasi saya akan disalurkan?
+                        </span>
+                    </summary>
+                    <p class="text-xs text-slate-400 leading-relaxed pl-5 pt-3 mt-2 border-t border-slate-800/60">
                         Buku yang terkumpul disortir terlebih dahulu, lalu didistribusikan ke Taman Bacaan Masyarakat (TBM), sekolah marjinal, dan saung baca binaan di Jabodetabek.
                     </p>
-                </div>
+                </details>
 
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
-                    <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
-                        <span class="text-amber-400">▼</span> Bagaimana cara mengetahui status buku yang sudah diserahkan?
-                    </h3>
-                    <p class="text-xs text-slate-400 leading-relaxed pl-5">
-                        Anda cukup memasukkan nomor WhatsApp atau email Anda di kolom Lacak Status pada Slide Dampak & Transparansi.
+                <details class="bg-slate-900 border border-slate-800 rounded-2xl p-5 transition group cursor-pointer">
+                    <summary class="text-sm font-bold text-white flex items-center justify-between list-none select-none">
+                        <span class="flex items-center gap-2">
+                            <span class="icon-arrow text-amber-400 text-xs">▶</span>
+                            Bagaimana cara mengetahui status buku yang sudah diserahkan?
+                        </span>
+                    </summary>
+                    <p class="text-xs text-slate-400 leading-relaxed pl-5 pt-3 mt-2 border-t border-slate-800/60">
+                        Anda cukup memasukkan nomor WhatsApp atau email Anda pada kolom Lacak Status di Slide Dampak & Transparansi.
                     </p>
-                </div>
+                </details>
             </div>
         </div>
     </section>
@@ -380,7 +473,6 @@
 
         <!-- TAMPILAN 2: CONTENT DASHBOARD ADMIN -->
         <div id="adminDashboardContent" class="bg-slate-900 border border-slate-800 w-full max-w-6xl rounded-3xl p-6 md:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto hidden">
-            <!-- Tombol Close Modal -->
             <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl font-bold p-2">
                 ✕
             </button>
@@ -411,7 +503,7 @@
                 </div>
             </div>
 
-            <!-- Tabel Kelola, Update Status & Hapus Data Admin -->
+            <!-- Tabel Kelola Data Admin -->
             <h3 class="text-lg font-semibold text-slate-200 mb-3">Daftar Entry Donasi & Kelola Status</h3>
             <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/50">
                 <table class="w-full text-left text-xs text-slate-300">
@@ -436,11 +528,9 @@
 
     </div>
 
-    <!-- SCRIPT LOGIKA INTEGRASI SUPABASE & FITUR LACAK -->
+    <!-- SCRIPT LOGIKA INTEGRASI SUPABASE & MAPS -->
     <script>
-        // Supabase Configuration
         const SUPABASE_URL = "https://olbfungnqytyyfnjxpmu.supabase.co"; 
-        // SILAKAN GANTI KUNCI DI BAWAH INI DENGAN ANON / PUBLISHABLE KEY SUPABASE ANDA
         const SUPABASE_ANON_KEY = "sb_publishable_SJE7vpDNTYtPxKqBo4Mq1w_2UWOtJLA";  
 
         let supabaseClient = null;
@@ -450,12 +540,18 @@
 
         const ADMIN_SECRET_PASSWORD = "admin123";
 
-        // Fetch Donasi & Stats
-        async function fetchDonationStats() {
-            if (!supabaseClient) {
-                console.warn("Supabase Client belum siap. Pastikan SUPABASE_ANON_KEY telah diisi.");
-                return;
+        // Fungsi mengubah lokasi titik pada Peta Google Maps
+        function setMapLocation(lat, lng, title) {
+            const iframe = document.getElementById('gmapIframe');
+            const mapTitle = document.getElementById('mapPointTitle');
+            iframe.src = `https://maps.google.com/maps?q=${lat},${lng}&z=14&output=embed`;
+            if (mapTitle) {
+                mapTitle.innerText = `Titik: ${title}`;
             }
+        }
+
+        async function fetchDonationStats() {
+            if (!supabaseClient) return;
 
             try {
                 const { data, error } = await supabaseClient
@@ -482,7 +578,6 @@
             }
         }
 
-        // Render Data ke Tabel Admin (Disertai Tombol Simpan & Hapus)
         function populateAdminTable(data) {
             const tbody = document.getElementById('adminTableBody');
             if (!data || data.length === 0) {
@@ -516,10 +611,10 @@
                     </td>
                     <td class="p-3">
                         <div class="flex items-center gap-1.5">
-                            <button onclick="updateDonationStatus(${item.id})" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition" title="Simpan Perubahan">
+                            <button onclick="updateDonationStatus(${item.id})" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition">
                                 💾 Simpan
                             </button>
-                            <button onclick="deleteDonation(${item.id})" class="px-2.5 py-1 bg-rose-500/20 border border-rose-500/40 hover:bg-rose-500/30 text-rose-300 font-bold rounded text-xs transition" title="Hapus Donasi">
+                            <button onclick="deleteDonation(${item.id})" class="px-2.5 py-1 bg-rose-500/20 border border-rose-500/40 hover:bg-rose-500/30 text-rose-300 font-bold rounded text-xs transition">
                                 🗑️ Hapus
                             </button>
                         </div>
@@ -528,15 +623,11 @@
             `).join('');
         }
 
-        // Fungsi Admin untuk Update Status & TBM Tujuan
         async function updateDonationStatus(id) {
             const statusVal = document.getElementById(`status-${id}`).value;
             const tbmVal = document.getElementById(`tbm-${id}`).value;
 
-            if (!supabaseClient) {
-                alert("Konfigurasi API Key Supabase belum diisi dengan benar.");
-                return;
-            }
+            if (!supabaseClient) return;
 
             try {
                 const { error } = await supabaseClient
@@ -550,19 +641,12 @@
                 fetchDonationStats();
             } catch (err) {
                 console.error("Gagal memperbarui status:", err);
-                alert("Gagal memperbarui status. Pastikan kolom 'status' & 'tbm_tujuan' sudah dibuat di Supabase.");
             }
         }
 
-        // Fungsi Admin untuk Menghapus Data Donasi
         async function deleteDonation(id) {
-            const confirmDelete = confirm("Apakah Anda yakin ingin menghapus data donasi ini?");
-            if (!confirmDelete) return;
-
-            if (!supabaseClient) {
-                alert("Konfigurasi API Key Supabase belum diisi dengan benar.");
-                return;
-            }
+            if (!confirm("Apakah Anda yakin ingin menghapus data donasi ini?")) return;
+            if (!supabaseClient) return;
 
             try {
                 const { error } = await supabaseClient
@@ -576,11 +660,9 @@
                 fetchDonationStats();
             } catch (err) {
                 console.error("Gagal menghapus data:", err);
-                alert("Gagal menghapus data dari Supabase.");
             }
         }
 
-        // Fitur Lacak Donasi untuk Donatur (Publik)
         async function trackDonation() {
             const query = document.getElementById('trackInput').value.trim();
             const resultBox = document.getElementById('trackResult');
@@ -628,11 +710,9 @@
 
             } catch (err) {
                 console.error("Gagal melacak donasi:", err);
-                resultBox.innerHTML = "<p class='text-rose-400 text-xs'>Gagal memuat status pelacakan.</p>";
             }
         }
 
-        // Submit Form Donasi
         document.getElementById('donationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
@@ -665,17 +745,13 @@
                     fetchDonationStats();
                 } catch (err) {
                     console.error("Gagal menyimpan donasi:", err);
-                    alert("Gagal menyimpan data donasi. Silakan periksa koneksi Supabase Anda.");
                 }
-            } else {
-                alert("Supabase belum dikonfigurasi dengan benar. Pastikan API key sudah dimasukkan.");
             }
 
             btn.disabled = false;
             btn.innerText = "Kirimkan Donasi";
         });
 
-        // Modal Auth Handler
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
         }
@@ -697,7 +773,6 @@
                 errorMsg.classList.add('hidden');
                 fetchDonationStats();
             } else {
-                errorMsg.classList.add('hidden');
                 errorMsg.classList.remove('hidden');
             }
         }
