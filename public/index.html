@@ -46,11 +46,13 @@
         <div class="hidden md:flex gap-6 text-sm font-medium text-slate-300 items-center">
             <a href="#hero" class="hover:text-amber-400 transition">Beranda</a>
             <a href="#dampak" class="hover:text-amber-400 transition">Dampak & Lacak</a>
+            <a href="#panduan" class="hover:text-amber-400 transition">Panduan Buku</a>
+            <a href="#posko" class="hover:text-amber-400 transition">Posko & Peta TBM</a>
             <a href="#donasi" class="hover:text-amber-400 transition">Formulir Donasi</a>
-            <a href="#kontak" class="hover:text-amber-400 transition">Kontak</a>
+            <a href="#faq" class="hover:text-amber-400 transition">FAQ</a>
             <!-- Tombol Buka Modal Admin -->
             <button onclick="openAdminModal()" class="hover:text-amber-400 transition text-slate-400 flex items-center gap-1 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
-                🔒 Panel Admin
+                🔒 Admin
             </button>
         </div>
         <a href="#donasi" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm transition">
@@ -138,7 +140,74 @@
         </div>
     </section>
 
-    <!-- SLIDE 3: FORMULIR DONASI -->
+    <!-- SLIDE 3: PANDUAN & SYARAT BUKU -->
+    <section id="panduan" class="w-full py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center my-auto">
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-3">
+                Panduan & <span class="text-emerald-400">Syarat Buku</span>
+            </h2>
+            <p class="text-slate-400 text-xs md:text-sm max-w-xl mx-auto mb-8">
+                Pastikan buku yang disalurkan bermanfaat dan siap dibaca oleh anak-anak dan masyarakat.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <!-- DITERIMA -->
+                <div class="p-6 bg-slate-900/80 rounded-2xl border border-emerald-500/30 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>📚</span> Jenis Buku yang Sangat Dibutuhkan
+                        </h3>
+                        <span class="text-[10px] font-semibold uppercase px-2 py-0.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded">✓ Diterima</span>
+                    </div>
+                    <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Buku Cerita Anak, Dongeng, & Komik Edukasi</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Buku Pelajaran Sekolah (Kurikulum Merdeka / K13)</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Novel Sastra, Biografi, & Pengembangan Diri</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Ensiklopedia, Kamus, & Sains Populer</li>
+                        <li class="flex items-start gap-2"><span class="text-emerald-400 font-bold">✓</span> Kondisi baik (halaman utuh, tidak basah/lapuk)</li>
+                    </ul>
+                </div>
+
+                <!-- DITOLAK -->
+                <div class="p-6 bg-slate-900/80 rounded-2xl border border-rose-500/30 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span>🚫</span> Kriteria Buku yang Ditolak
+                        </h3>
+                        <span class="text-[10px] font-semibold uppercase px-2 py-0.5 bg-rose-500/20 text-rose-300 border border-rose-500/40 rounded">✕ Tidak Diterima</span>
+                    </div>
+                    <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                        <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Buku rusak berat (halaman hilang, berjamur, robek parah)</li>
+                        <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Buku LKS/Soal yang sudah penuh diisi coretan</li>
+                        <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Majalah/Katalog Iklan atau Dokumen Pribadi</li>
+                        <li class="flex items-start gap-2"><span class="text-rose-400 font-bold">✕</span> Buku yang mengandung unsur Pornografi, SARA, atau Kekerasan</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: POSKO & PETA TBM INTERAKTIF (KOSONG / PLACEHOLDER) -->
+    <section id="posko" class="w-full bg-slate-900/40 py-12">
+        <div class="max-w-3xl mx-auto text-center px-4 my-auto space-y-4">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white">
+                Posko & <span class="text-cyan-400">Peta TBM Interaktif</span>
+            </h2>
+            <p class="text-slate-400 text-xs md:text-sm max-w-lg mx-auto">
+                Cari dan temukan titik lokasi penyerahan buku secara mandiri di wilayah DKI Jakarta.
+            </p>
+
+            <div class="p-12 bg-slate-900 border border-slate-800 rounded-3xl text-center space-y-3">
+                <div class="text-5xl">📍</div>
+                <h3 class="text-xl font-bold text-white">Data Lokasi TBM Segera Hadir</h3>
+                <p class="text-slate-400 text-xs max-w-md mx-auto">
+                    Saat ini titik lokasi posko dan integrasi peta TBM interaktif sedang dalam tahap verifikasi alamat oleh tim relawan.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: FORMULIR DONASI -->
     <section id="donasi" class="w-full">
         <div class="max-w-xl mx-auto w-full px-4">
             <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 shadow-2xl">
@@ -207,7 +276,48 @@
         </div>
     </section>
 
-    <!-- SLIDE 4: KONTAK & FOOTER -->
+    <!-- SLIDE 6: PERTANYAAN UMUM (FAQ) -->
+    <section id="faq" class="w-full bg-slate-900/50 py-12">
+        <div class="max-w-3xl mx-auto px-4 my-auto text-center space-y-8">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-2">
+                    Pertanyaan <span class="text-amber-400">Umum (FAQ)</span>
+                </h2>
+                <p class="text-slate-400 text-xs md:text-sm">Hal-hal yang sering ditanyakan oleh calon donatur.</p>
+            </div>
+
+            <div class="space-y-4 text-left">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
+                        <span class="text-amber-400">▼</span> Apakah layanan penjemputan buku berbayar?
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed pl-5">
+                        Layanan penjemputan relawan kami gratis untuk wilayah DKI Jakarta dengan kuota minimal 15 buku. Jika di bawah 15 buku, kami menyarankan pengiriman via kurir atau diantar mandiri.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
+                        <span class="text-amber-400">▼</span> Ke mana buku donasi saya akan disalurkan?
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed pl-5">
+                        Buku yang terkumpul disortir terlebih dahulu, lalu didistribusikan ke Taman Bacaan Masyarakat (TBM), sekolah marjinal, dan saung baca binaan di Jabodetabek.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2 mb-2">
+                        <span class="text-amber-400">▼</span> Bagaimana cara mengetahui status buku yang sudah diserahkan?
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed pl-5">
+                        Anda cukup memasukkan nomor WhatsApp atau email Anda di kolom Lacak Status pada Slide Dampak & Transparansi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 7: KONTAK & FOOTER -->
     <section id="kontak" class="w-full bg-slate-900/60 justify-between !p-0">
         <div class="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 my-auto text-center py-12">
             <!-- Lokasi -->
