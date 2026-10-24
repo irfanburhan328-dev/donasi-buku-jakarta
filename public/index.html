@@ -45,7 +45,7 @@
         </div>
         <div class="hidden md:flex gap-6 text-sm font-medium text-slate-300 items-center">
             <a href="#hero" class="hover:text-amber-400 transition">Beranda</a>
-            <a href="#dampak" class="hover:text-amber-400 transition">Dampak</a>
+            <a href="#dampak" class="hover:text-amber-400 transition">Dampak & Lacak</a>
             <a href="#donasi" class="hover:text-amber-400 transition">Formulir Donasi</a>
             <a href="#kontak" class="hover:text-amber-400 transition">Kontak</a>
             <!-- Tombol Buka Modal Admin -->
@@ -78,39 +78,61 @@
                     Mulai Donasi
                 </a>
                 <a href="#dampak" class="w-full sm:w-auto px-8 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl border border-slate-700 transition">
-                    Lihat Dampak
+                    Lacak & Lihat Dampak
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- SLIDE 2: DAMPAK & TRANSPARANSI -->
-    <section id="dampak" class="bg-slate-900/50 w-full">
-        <div class="max-w-5xl mx-auto text-center px-4 w-full">
-            <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-3">
-                Dampak & <span class="text-amber-400">Transparansi</span>
-            </h2>
-            <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto mb-12">
-                Jejak kebaikan warga Jakarta yang telah tersalurkan secara nyata.
-            </p>
+    <!-- SLIDE 2: DAMPAK, TRANSPARANSI & LACAK DONASI -->
+    <section id="dampak" class="bg-slate-900/50 w-full py-12 overflow-y-auto">
+        <div class="max-w-5xl mx-auto text-center px-4 w-full my-auto space-y-8">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-2">
+                    Dampak & <span class="text-amber-400">Transparansi</span>
+                </h2>
+                <p class="text-slate-400 text-xs md:text-sm max-w-xl mx-auto">
+                    Jejak kebaikan warga Jakarta yang telah tersalurkan secara nyata.
+                </p>
+            </div>
 
             <!-- Grid 4 Kartu Statistik -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
-                    <div id="stat-buku" class="text-3xl md:text-4xl font-extrabold text-cyan-400 mb-2">0</div>
-                    <p class="text-slate-400 text-xs md:text-sm font-medium">Buku Terkumpul</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-5 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-buku" class="text-2xl md:text-3xl font-extrabold text-cyan-400 mb-1">0</div>
+                    <p class="text-slate-400 text-xs font-medium">Buku Terkumpul</p>
                 </div>
-                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
-                    <div id="stat-donatur" class="text-3xl md:text-4xl font-extrabold text-amber-400 mb-2">0</div>
-                    <p class="text-slate-400 text-xs md:text-sm font-medium">Donatur Bergabung</p>
+                <div class="p-5 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-donatur" class="text-2xl md:text-3xl font-extrabold text-amber-400 mb-1">0</div>
+                    <p class="text-slate-400 text-xs font-medium">Donatur Bergabung</p>
                 </div>
-                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
-                    <div id="stat-tbm" class="text-3xl md:text-4xl font-extrabold text-emerald-400 mb-2">0</div>
-                    <p class="text-slate-400 text-xs md:text-sm font-medium">TBM / Sekolah Terbantu</p>
+                <div class="p-5 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-tbm" class="text-2xl md:text-3xl font-extrabold text-emerald-400 mb-1">12</div>
+                    <p class="text-slate-400 text-xs font-medium">TBM / Posko Terbantu</p>
                 </div>
-                <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
-                    <div id="stat-wilayah" class="text-3xl md:text-4xl font-extrabold text-purple-400 mb-2">0</div>
-                    <p class="text-slate-400 text-xs md:text-sm font-medium">Wilayah Kota DKI</p>
+                <div class="p-5 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
+                    <div id="stat-wilayah" class="text-2xl md:text-3xl font-extrabold text-purple-400 mb-1">5</div>
+                    <p class="text-slate-400 text-xs font-medium">Wilayah DKI Jakarta</p>
+                </div>
+            </div>
+
+            <!-- FITUR LACAK DONASI PUBLIK -->
+            <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 text-left max-w-2xl mx-auto shadow-xl">
+                <h3 class="text-lg font-bold text-white mb-1 flex items-center gap-2">
+                    <span>🔍</span> Lacak Status Penyaluran Buku
+                </h3>
+                <p class="text-slate-400 text-xs mb-4">Masukkan nomor WhatsApp atau Email yang Anda gunakan saat mendaftar donasi untuk melihat status terkini.</p>
+                
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <input type="text" id="trackInput" placeholder="Contoh: 08123456789 atau email@domain.com" class="flex-1 px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400">
+                    <button onclick="trackDonation()" class="px-6 py-2.5 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold rounded-xl text-sm transition">
+                        Cari Status
+                    </button>
+                </div>
+
+                <!-- Hasil Pelacakan -->
+                <div id="trackResult" class="mt-4 hidden space-y-3 pt-3 border-t border-slate-700/80">
+                    <!-- Data ditarik dinamis dari JS -->
                 </div>
             </div>
         </div>
@@ -185,7 +207,7 @@
         </div>
     </section>
 
-    <!-- SLIDE 4: KONTAK & FOOTER (SESUAI PERMINTAAN) -->
+    <!-- SLIDE 4: KONTAK & FOOTER -->
     <section id="kontak" class="w-full bg-slate-900/60 justify-between !p-0">
         <div class="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 my-auto text-center py-12">
             <!-- Lokasi -->
@@ -246,8 +268,8 @@
             </form>
         </div>
 
-        <!-- TAMPILAN 2: CONTENT DASHBOARD ADMIN (RAHASIA) -->
-        <div id="adminDashboardContent" class="bg-slate-900 border border-slate-800 w-full max-w-5xl rounded-3xl p-6 md:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto hidden">
+        <!-- TAMPILAN 2: CONTENT DASHBOARD ADMIN -->
+        <div id="adminDashboardContent" class="bg-slate-900 border border-slate-800 w-full max-w-6xl rounded-3xl p-6 md:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto hidden">
             <!-- Tombol Close Modal -->
             <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-xl font-bold p-2">
                 ✕
@@ -266,7 +288,7 @@
             <!-- Ringkasan Data Admin -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
-                    <p class="text-xs text-slate-400">Total Donasi</p>
+                    <p class="text-xs text-slate-400">Total Donasi Masuk</p>
                     <p id="adminTotalDonasi" class="text-xl font-bold text-cyan-400">0 Record</p>
                 </div>
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
@@ -279,18 +301,18 @@
                 </div>
             </div>
 
-            <!-- Tabel Riwayat Donasi Lengkap -->
-            <h3 class="text-lg font-semibold text-slate-200 mb-3">Daftar Entry Donasi Masuk</h3>
+            <!-- Tabel Kelola, Update Status & Hapus Data Admin -->
+            <h3 class="text-lg font-semibold text-slate-200 mb-3">Daftar Entry Donasi & Kelola Status</h3>
             <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/50">
                 <table class="w-full text-left text-xs text-slate-300">
                     <thead class="bg-slate-800/80 text-slate-400 uppercase font-semibold">
                         <tr>
-                            <th class="p-3">Nama Donatur</th>
-                            <th class="p-3">Email / WA</th>
-                            <th class="p-3">Kategori & Judul Buku</th>
-                            <th class="p-3">Jumlah</th>
-                            <th class="p-3">Metode</th>
-                            <th class="p-3">Alamat / Catatan</th>
+                            <th class="p-3">Donatur</th>
+                            <th class="p-3">Buku & Jml</th>
+                            <th class="p-3">Metode & Alamat</th>
+                            <th class="p-3">Status Penyaluran</th>
+                            <th class="p-3">TBM / Posko Penerima</th>
+                            <th class="p-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="adminTableBody" class="divide-y divide-slate-800">
@@ -304,27 +326,32 @@
 
     </div>
 
-    <!-- SCRIPT LOGIKA INTEGRASI SUPABASE & MODAL ADMIN -->
+    <!-- SCRIPT LOGIKA INTEGRASI SUPABASE & FITUR LACAK -->
     <script>
-        // Supabase URL Anda
+        // Supabase Configuration
         const SUPABASE_URL = "https://olbfungnqytyyfnjxpmu.supabase.co"; 
-        // Masukkan Anon/Publishable Key Anda di bawah ini
+        // SILAKAN GANTI KUNCI DI BAWAH INI DENGAN ANON / PUBLISHABLE KEY SUPABASE ANDA
         const SUPABASE_ANON_KEY = "sb_publishable_SJE7vpDNTYtPxKqBo4Mq1w_2UWOtJLA";  
 
         let supabaseClient = null;
-        if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co')) {
+        if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co') && !SUPABASE_ANON_KEY.includes('MASUKKAN_KEY')) {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         }
 
         const ADMIN_SECRET_PASSWORD = "admin123";
 
+        // Fetch Donasi & Stats
         async function fetchDonationStats() {
-            if (!supabaseClient) return;
+            if (!supabaseClient) {
+                console.warn("Supabase Client belum siap. Pastikan SUPABASE_ANON_KEY telah diisi.");
+                return;
+            }
 
             try {
                 const { data, error } = await supabaseClient
                     .from('donations')
-                    .select('*');
+                    .select('*')
+                    .order('created_at', { ascending: false });
 
                 if (error) throw error;
 
@@ -345,6 +372,7 @@
             }
         }
 
+        // Render Data ke Tabel Admin (Disertai Tombol Simpan & Hapus)
         function populateAdminTable(data) {
             const tbody = document.getElementById('adminTableBody');
             if (!data || data.length === 0) {
@@ -354,16 +382,147 @@
 
             tbody.innerHTML = data.map(item => `
                 <tr class="hover:bg-slate-800/40 border-b border-slate-800/50">
-                    <td class="p-3 font-semibold text-white">${item.nama || '-'}</td>
-                    <td class="p-3 text-slate-300">${item.email || '-'}<br><span class="text-amber-400">${item.whatsapp || '-'}</span></td>
-                    <td class="p-3"><span class="text-cyan-300 font-medium">${item.kategori_buku || '-'}</span><br><span class="text-slate-400">${item.judul_buku || '-'}</span></td>
-                    <td class="p-3 font-bold text-amber-400">${item.jumlah_buku || 0} Pcs</td>
-                    <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-800 border border-slate-700">${item.metode_pengiriman || '-'}</span></td>
-                    <td class="p-3 text-slate-400 max-w-xs truncate">${item.alamat || '-'}</td>
+                    <td class="p-3 font-semibold text-white">
+                        ${item.nama || '-'}<br>
+                        <span class="text-slate-400 font-normal text-[11px]">${item.whatsapp || item.email || '-'}</span>
+                    </td>
+                    <td class="p-3">
+                        <span class="text-cyan-300 font-medium">${item.judul_buku || '-'}</span><br>
+                        <span class="text-amber-400 font-bold">${item.jumlah_buku || 0} Pcs</span> (${item.kategori_buku || '-'})
+                    </td>
+                    <td class="p-3">
+                        <span class="px-2 py-0.5 rounded text-[10px] bg-slate-800 border border-slate-700">${item.metode_pengiriman || '-'}</span><br>
+                        <span class="text-slate-400 text-[11px] truncate max-w-xs block">${item.alamat || '-'}</span>
+                    </td>
+                    <td class="p-3">
+                        <select id="status-${item.id}" class="bg-slate-800 border border-slate-700 rounded text-slate-200 px-2 py-1 text-xs focus:outline-none focus:border-amber-400">
+                            <option value="Menunggu Penjemputan" ${item.status === 'Menunggu Penjemputan' ? 'selected' : ''}>⏳ Menunggu Penjemputan</option>
+                            <option value="Dalam Perjalanan" ${item.status === 'Dalam Perjalanan' ? 'selected' : ''}>🚚 Dalam Perjalanan</option>
+                            <option value="Tersalurkan" ${item.status === 'Tersalurkan' ? 'selected' : ''}>✅ Tersalurkan</option>
+                        </select>
+                    </td>
+                    <td class="p-3">
+                        <input type="text" id="tbm-${item.id}" value="${item.tbm_tujuan || 'Dalam Proses Pendataan'}" class="bg-slate-800 border border-slate-700 rounded text-slate-200 px-2 py-1 text-xs w-full focus:outline-none focus:border-amber-400" placeholder="Nama TBM Penerima">
+                    </td>
+                    <td class="p-3">
+                        <div class="flex items-center gap-1.5">
+                            <button onclick="updateDonationStatus(${item.id})" class="px-2.5 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition" title="Simpan Perubahan">
+                                💾 Simpan
+                            </button>
+                            <button onclick="deleteDonation(${item.id})" class="px-2.5 py-1 bg-rose-500/20 border border-rose-500/40 hover:bg-rose-500/30 text-rose-300 font-bold rounded text-xs transition" title="Hapus Donasi">
+                                🗑️ Hapus
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             `).join('');
         }
 
+        // Fungsi Admin untuk Update Status & TBM Tujuan
+        async function updateDonationStatus(id) {
+            const statusVal = document.getElementById(`status-${id}`).value;
+            const tbmVal = document.getElementById(`tbm-${id}`).value;
+
+            if (!supabaseClient) {
+                alert("Konfigurasi API Key Supabase belum diisi dengan benar.");
+                return;
+            }
+
+            try {
+                const { error } = await supabaseClient
+                    .from('donations')
+                    .update({ status: statusVal, tbm_tujuan: tbmVal })
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                alert("✅ Status penyaluran berhasil diperbarui!");
+                fetchDonationStats();
+            } catch (err) {
+                console.error("Gagal memperbarui status:", err);
+                alert("Gagal memperbarui status. Pastikan kolom 'status' & 'tbm_tujuan' sudah dibuat di Supabase.");
+            }
+        }
+
+        // Fungsi Admin untuk Menghapus Data Donasi
+        async function deleteDonation(id) {
+            const confirmDelete = confirm("Apakah Anda yakin ingin menghapus data donasi ini?");
+            if (!confirmDelete) return;
+
+            if (!supabaseClient) {
+                alert("Konfigurasi API Key Supabase belum diisi dengan benar.");
+                return;
+            }
+
+            try {
+                const { error } = await supabaseClient
+                    .from('donations')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                alert("🗑️ Data donasi berhasil dihapus!");
+                fetchDonationStats();
+            } catch (err) {
+                console.error("Gagal menghapus data:", err);
+                alert("Gagal menghapus data dari Supabase.");
+            }
+        }
+
+        // Fitur Lacak Donasi untuk Donatur (Publik)
+        async function trackDonation() {
+            const query = document.getElementById('trackInput').value.trim();
+            const resultBox = document.getElementById('trackResult');
+
+            if (!query) {
+                alert("Silakan masukkan Nomor WhatsApp atau Email Anda.");
+                return;
+            }
+
+            resultBox.innerHTML = "<p class='text-slate-400 text-xs'>Mencari data donasi Anda...</p>";
+            resultBox.classList.remove('hidden');
+
+            if (!supabaseClient) {
+                resultBox.innerHTML = "<p class='text-rose-400 text-xs'>❌ Supabase belum dikonfigurasi dengan API key yang sah.</p>";
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('donations')
+                    .select('*')
+                    .or(`whatsapp.eq.${query},email.eq.${query}`)
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    resultBox.innerHTML = "<p class='text-rose-400 text-xs'>❌ Data tidak ditemukan. Pastikan email/WhatsApp sesuai saat mendaftar.</p>";
+                    return;
+                }
+
+                resultBox.innerHTML = data.map(item => `
+                    <div class="p-3 bg-slate-900 border border-slate-700 rounded-xl space-y-1">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-white text-xs">📖 ${item.judul_buku || 'Buku Donasi'} (${item.jumlah_buku || 0} Pcs)</span>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${item.status === 'Tersalurkan' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'}">
+                                ${item.status || 'Menunggu Penjemputan'}
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-slate-400">
+                            Penerima / Posko: <span class="text-cyan-300 font-medium">${item.tbm_tujuan || 'Dalam Proses Pendataan'}</span>
+                        </p>
+                    </div>
+                `).join('');
+
+            } catch (err) {
+                console.error("Gagal melacak donasi:", err);
+                resultBox.innerHTML = "<p class='text-rose-400 text-xs'>Gagal memuat status pelacakan.</p>";
+            }
+        }
+
+        // Submit Form Donasi
         document.getElementById('donationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
@@ -378,7 +537,9 @@
                 jumlah_buku: parseInt(document.getElementById('jumlah_buku').value),
                 judul_buku: document.getElementById('judul_buku').value,
                 metode_pengiriman: document.getElementById('metode_pengiriman').value,
-                alamat: document.getElementById('alamat').value
+                alamat: document.getElementById('alamat').value,
+                status: 'Menunggu Penjemputan',
+                tbm_tujuan: 'Dalam Proses Pendataan'
             };
 
             if (supabaseClient) {
@@ -389,7 +550,7 @@
 
                     if (error) throw error;
 
-                    alert("🎉 Terima kasih! Donasi Anda berhasil terdata.");
+                    alert("🎉 Terima kasih! Donasi Anda berhasil terdata. Anda dapat melacak status penyaluran buku Anda menggunakan nomor WhatsApp/email di Slide 2!");
                     document.getElementById('donationForm').reset();
                     fetchDonationStats();
                 } catch (err) {
@@ -397,13 +558,14 @@
                     alert("Gagal menyimpan data donasi. Silakan periksa koneksi Supabase Anda.");
                 }
             } else {
-                alert("Supabase belum dikonfigurasi dengan benar.");
+                alert("Supabase belum dikonfigurasi dengan benar. Pastikan API key sudah dimasukkan.");
             }
 
             btn.disabled = false;
             btn.innerText = "Kirimkan Donasi";
         });
 
+        // Modal Auth Handler
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
         }
