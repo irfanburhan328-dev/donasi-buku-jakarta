@@ -6,6 +6,8 @@
     <title>Donasi Buku Jakarta</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         /* Mengaktifkan scroll snap vertikal antar slide */
         html {
@@ -140,7 +142,6 @@
                         </div>
                     </div>
                     
-                    <!-- FITUR KATEGORI BUKU & JUMLAH BUKU -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-300 mb-1">Kategori Buku</label>
@@ -179,7 +180,7 @@
                         <textarea id="alamat" rows="2" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:border-amber-400 transition" placeholder="Tuliskan alamat lengkap jika di-jemput, atau nomor resi/catatan kurir..."></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition mt-2">
+                    <button type="submit" id="btnSubmit" class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition mt-2">
                         Kirimkan Donasi
                     </button>
                 </form>
@@ -237,7 +238,7 @@
                 </div>
                 <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50">
                     <p class="text-xs text-slate-400">Status Database</p>
-                    <p class="text-xl font-bold text-emerald-400">Terhubung</p>
+                    <p id="dbStatus" class="text-xl font-bold text-emerald-400">Terhubung</p>
                 </div>
             </div>
 
@@ -257,7 +258,7 @@
                     </thead>
                     <tbody id="adminTableBody" class="divide-y divide-slate-800">
                         <tr>
-                            <td colspan="6" class="text-center p-4 text-slate-500">Belum ada data donasi terbaru.</td>
+                            <td colspan="6" class="text-center p-4 text-slate-500">Memuat data dari Supabase...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -271,10 +272,123 @@
         © 2026 Donasi Buku Jakarta. All rights reserved.
     </footer>
 
-    <!-- SCRIPT LOGIK AUTHENTICATION ADMIN -->
+    <!-- SCRIPT LOGIKA INTEGRASI SUPABASE & MODAL ADMIN -->
     <script>
+        // -------------------------------------------------------------
+        // 1. ISI DENGAN SUPABASE URL & ANON KEY MILIK ANDA
+        // -------------------------------------------------------------
+        const SUPABASE_URL = "https://YOUR-SUPABASE-PROJECT-URL.supabase.co"; 
+        const SUPABASE_ANON_KEY = "YOUR-SUPABASE-ANON-KEY"; 
+
+        // Inisialisasi Supabase Client
+        let supabaseClient = null;
+        if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co')) {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
         const ADMIN_SECRET_PASSWORD = "admin123";
 
+        // -------------------------------------------------------------
+        // 2. FUNGSI LOAD STATISTIK DARI SUPABASE
+        // -------------------------------------------------------------
+        async function fetchDonationStats() {
+            if (!supabaseClient) return;
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('donations')
+                    .select('*');
+
+                if (error) throw error;
+
+                if (data) {
+                    const totalDonatur = data.length;
+                    const totalBuku = data.reduce((acc, curr) => acc + (parseInt(curr.jumlah_buku) || 0), 0);
+
+                    // Update UI Statistik Publik
+                    document.getElementById('stat-donatur').innerText = totalDonatur;
+                    document.getElementById('stat-buku').innerText = totalBuku;
+
+                    // Update UI Stats Admin
+                    document.getElementById('adminTotalDonasi').innerText = `${totalDonatur} Record`;
+                    document.getElementById('adminTotalBuku').innerText = `${totalBuku} Pcs`;
+
+                    // Populate Tabel Admin
+                    populateAdminTable(data);
+                }
+            } catch (err) {
+                console.error("Gagal mengambil data dari Supabase:", err);
+            }
+        }
+
+        // -------------------------------------------------------------
+        // 3. FUNGSI TAMPILKAN DATA KE TABEL ADMIN
+        // -------------------------------------------------------------
+        function populateAdminTable(data) {
+            const tbody = document.getElementById('adminTableBody');
+            if (!data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="text-center p-4 text-slate-500">Belum ada data donasi terbaru.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = data.map(item => `
+                <tr class="hover:bg-slate-800/40 border-b border-slate-800/50">
+                    <td class="p-3 font-semibold text-white">${item.nama || '-'}</td>
+                    <td class="p-3 text-slate-300">${item.email || '-'}<br><span class="text-amber-400">${item.whatsapp || '-'}</span></td>
+                    <td class="p-3"><span class="text-cyan-300 font-medium">${item.kategori_buku || '-'}</span><br><span class="text-slate-400">${item.judul_buku || '-'}</span></td>
+                    <td class="p-3 font-bold text-amber-400">${item.jumlah_buku || 0} Pcs</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-800 border border-slate-700">${item.metode_pengiriman || '-'}</span></td>
+                    <td class="p-3 text-slate-400 max-w-xs truncate">${item.alamat || '-'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // -------------------------------------------------------------
+        // 4. LOGIKA FORM SUBMIT (SIMPAN KE SUPABASE)
+        // -------------------------------------------------------------
+        document.getElementById('donationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.innerText = "Mengirimkan...";
+
+            const payload = {
+                nama: document.getElementById('nama').value,
+                email: document.getElementById('email').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                kategori_buku: document.getElementById('kategori_buku').value,
+                jumlah_buku: parseInt(document.getElementById('jumlah_buku').value),
+                judul_buku: document.getElementById('judul_buku').value,
+                metode_pengiriman: document.getElementById('metode_pengiriman').value,
+                alamat: document.getElementById('alamat').value
+            };
+
+            if (supabaseClient) {
+                try {
+                    const { data, error } = await supabaseClient
+                        .from('donations')
+                        .insert([payload]);
+
+                    if (error) throw error;
+
+                    alert("🎉 Terima kasih! Donasi Anda berhasil terdata.");
+                    document.getElementById('donationForm').reset();
+                    fetchDonationStats(); // Refresh statistik
+                } catch (err) {
+                    console.error("Gagal menyimpan donasi:", err);
+                    alert("Gagal menyimpan data donasi. Silakan periksa koneksi Supabase Anda.");
+                }
+            } else {
+                alert("Supabase belum dikonfigurasi (SUPABASE_URL & ANON_KEY). Data belum tersimpan ke server.");
+            }
+
+            btn.disabled = false;
+            btn.innerText = "Kirimkan Donasi";
+        });
+
+        // -------------------------------------------------------------
+        // 5. FUNGSI MODAL ADMIN
+        // -------------------------------------------------------------
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
         }
@@ -294,6 +408,7 @@
                 document.getElementById('adminAuthBox').classList.add('hidden');
                 document.getElementById('adminDashboardContent').classList.remove('hidden');
                 errorMsg.classList.add('hidden');
+                fetchDonationStats(); // Muat data terbaru saat admin berhasil login
             } else {
                 errorMsg.classList.remove('hidden');
             }
@@ -304,6 +419,9 @@
             document.getElementById('adminAuthBox').classList.remove('hidden');
             document.getElementById('adminPasswordInput').value = "";
         }
+
+        // Muat data statistik saat halaman pertama kali dibuka
+        window.addEventListener('DOMContentLoaded', fetchDonationStats);
     </script>
 </body>
 </html>
