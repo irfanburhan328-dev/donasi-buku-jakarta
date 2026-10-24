@@ -47,6 +47,7 @@
             <a href="#hero" class="hover:text-amber-400 transition">Beranda</a>
             <a href="#dampak" class="hover:text-amber-400 transition">Dampak</a>
             <a href="#donasi" class="hover:text-amber-400 transition">Formulir Donasi</a>
+            <a href="#kontak" class="hover:text-amber-400 transition">Kontak</a>
             <!-- Tombol Buka Modal Admin -->
             <button onclick="openAdminModal()" class="hover:text-amber-400 transition text-slate-400 flex items-center gap-1 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">
                 🔒 Panel Admin
@@ -95,22 +96,18 @@
 
             <!-- Grid 4 Kartu Statistik -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <!-- Kartu 1 -->
                 <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
                     <div id="stat-buku" class="text-3xl md:text-4xl font-extrabold text-cyan-400 mb-2">0</div>
                     <p class="text-slate-400 text-xs md:text-sm font-medium">Buku Terkumpul</p>
                 </div>
-                <!-- Kartu 2 -->
                 <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
                     <div id="stat-donatur" class="text-3xl md:text-4xl font-extrabold text-amber-400 mb-2">0</div>
                     <p class="text-slate-400 text-xs md:text-sm font-medium">Donatur Bergabung</p>
                 </div>
-                <!-- Kartu 3 -->
                 <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
                     <div id="stat-tbm" class="text-3xl md:text-4xl font-extrabold text-emerald-400 mb-2">0</div>
                     <p class="text-slate-400 text-xs md:text-sm font-medium">TBM / Sekolah Terbantu</p>
                 </div>
-                <!-- Kartu 4 -->
                 <div class="p-6 bg-slate-800/60 rounded-2xl border border-slate-700/60 backdrop-blur-sm">
                     <div id="stat-wilayah" class="text-3xl md:text-4xl font-extrabold text-purple-400 mb-2">0</div>
                     <p class="text-slate-400 text-xs md:text-sm font-medium">Wilayah Kota DKI</p>
@@ -185,6 +182,46 @@
                     </button>
                 </form>
             </div>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: KONTAK & FOOTER (SESUAI PERMINTAAN) -->
+    <section id="kontak" class="w-full bg-slate-900/60 justify-between !p-0">
+        <div class="w-full max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 my-auto text-center py-12">
+            <!-- Lokasi -->
+            <div class="space-y-3 p-4 bg-slate-800/40 rounded-2xl border border-slate-800">
+                <div class="text-2xl text-cyan-400">📍</div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Location</h4>
+                <p class="text-slate-200 font-medium text-sm">Jakarta</p>
+            </div>
+            <!-- Telepon -->
+            <div class="space-y-3 p-4 bg-slate-800/40 rounded-2xl border border-slate-800">
+                <div class="text-2xl text-amber-400">📞</div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Phone</h4>
+                <p class="text-slate-200 font-medium text-sm">+62 888-9999-0000</p>
+            </div>
+            <!-- Email -->
+            <div class="space-y-3 p-4 bg-slate-800/40 rounded-2xl border border-slate-800">
+                <div class="text-2xl text-emerald-400">✉️</div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Email</h4>
+                <p class="text-slate-200 font-medium text-sm">donasibuku.jkt@gmail.com</p>
+            </div>
+            <!-- Connect / Sosmed -->
+            <div class="space-y-3 p-4 bg-slate-800/40 rounded-2xl border border-slate-800">
+                <div class="text-2xl text-purple-400">🔗</div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400">Connect</h4>
+                <div class="flex justify-center items-center gap-3 text-slate-200">
+                    <a href="https://instagram.com" target="_blank" class="hover:text-amber-400 transition font-medium text-sm flex items-center gap-1">
+                        📷 Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bagian Bawah Hijau / Teal -->
+        <div class="w-full bg-teal-900/80 border-t border-teal-800/50 py-8 text-center text-white">
+            <h3 class="text-xl md:text-2xl font-extrabold tracking-widest uppercase">DONASIBUKU.JKT</h3>
+            <p class="text-teal-200/80 text-xs md:text-sm mt-1 font-medium">Let's Collaborate!</p>
         </div>
     </section>
 
@@ -267,20 +304,13 @@
 
     </div>
 
-    <!-- Footer Ringkas di Bagian Bawah -->
-    <footer class="fixed bottom-2 w-full text-center text-xs text-slate-500 pointer-events-none">
-        © 2026 Donasi Buku Jakarta. All rights reserved.
-    </footer>
-
     <!-- SCRIPT LOGIKA INTEGRASI SUPABASE & MODAL ADMIN -->
     <script>
-        // -------------------------------------------------------------
-        // 1. ISI DENGAN SUPABASE URL & ANON KEY MILIK ANDA
-        // -------------------------------------------------------------
+        // Supabase URL Anda
         const SUPABASE_URL = "https://olbfungnqytyyfnjxpmu.supabase.co"; 
-        const SUPABASE_ANON_KEY = "sb_publishable_SJE7vpDNTYtPxKqBo4Mq1w_2UWOtJLA"; 
+        // Masukkan Anon/Publishable Key Anda di bawah ini
+        const SUPABASE_ANON_KEY = "sb_publishable_SJE7vpDNTYtPxKqBo4Mq1w_2UWOtJLA";  
 
-        // Inisialisasi Supabase Client
         let supabaseClient = null;
         if (typeof supabase !== 'undefined' && SUPABASE_URL.includes('supabase.co')) {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -288,9 +318,6 @@
 
         const ADMIN_SECRET_PASSWORD = "admin123";
 
-        // -------------------------------------------------------------
-        // 2. FUNGSI LOAD STATISTIK DARI SUPABASE
-        // -------------------------------------------------------------
         async function fetchDonationStats() {
             if (!supabaseClient) return;
 
@@ -305,15 +332,12 @@
                     const totalDonatur = data.length;
                     const totalBuku = data.reduce((acc, curr) => acc + (parseInt(curr.jumlah_buku) || 0), 0);
 
-                    // Update UI Statistik Publik
                     document.getElementById('stat-donatur').innerText = totalDonatur;
                     document.getElementById('stat-buku').innerText = totalBuku;
 
-                    // Update UI Stats Admin
                     document.getElementById('adminTotalDonasi').innerText = `${totalDonatur} Record`;
                     document.getElementById('adminTotalBuku').innerText = `${totalBuku} Pcs`;
 
-                    // Populate Tabel Admin
                     populateAdminTable(data);
                 }
             } catch (err) {
@@ -321,9 +345,6 @@
             }
         }
 
-        // -------------------------------------------------------------
-        // 3. FUNGSI TAMPILKAN DATA KE TABEL ADMIN
-        // -------------------------------------------------------------
         function populateAdminTable(data) {
             const tbody = document.getElementById('adminTableBody');
             if (!data || data.length === 0) {
@@ -343,9 +364,6 @@
             `).join('');
         }
 
-        // -------------------------------------------------------------
-        // 4. LOGIKA FORM SUBMIT (SIMPAN KE SUPABASE)
-        // -------------------------------------------------------------
         document.getElementById('donationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('btnSubmit');
@@ -373,22 +391,19 @@
 
                     alert("🎉 Terima kasih! Donasi Anda berhasil terdata.");
                     document.getElementById('donationForm').reset();
-                    fetchDonationStats(); // Refresh statistik
+                    fetchDonationStats();
                 } catch (err) {
                     console.error("Gagal menyimpan donasi:", err);
                     alert("Gagal menyimpan data donasi. Silakan periksa koneksi Supabase Anda.");
                 }
             } else {
-                alert("Supabase belum dikonfigurasi (SUPABASE_URL & ANON_KEY). Data belum tersimpan ke server.");
+                alert("Supabase belum dikonfigurasi dengan benar.");
             }
 
             btn.disabled = false;
             btn.innerText = "Kirimkan Donasi";
         });
 
-        // -------------------------------------------------------------
-        // 5. FUNGSI MODAL ADMIN
-        // -------------------------------------------------------------
         function openAdminModal() {
             document.getElementById('adminModal').classList.remove('hidden');
         }
@@ -408,8 +423,9 @@
                 document.getElementById('adminAuthBox').classList.add('hidden');
                 document.getElementById('adminDashboardContent').classList.remove('hidden');
                 errorMsg.classList.add('hidden');
-                fetchDonationStats(); // Muat data terbaru saat admin berhasil login
+                fetchDonationStats();
             } else {
+                errorMsg.classList.add('hidden');
                 errorMsg.classList.remove('hidden');
             }
         }
@@ -420,7 +436,6 @@
             document.getElementById('adminPasswordInput').value = "";
         }
 
-        // Muat data statistik saat halaman pertama kali dibuka
         window.addEventListener('DOMContentLoaded', fetchDonationStats);
     </script>
 </body>
